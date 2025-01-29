@@ -153,17 +153,18 @@ const Navbar = () => {
         
 
           {/* User Icon */}
-          <Link href={''}>
+          <Link href={'/Authentication'}>
           <button className="block sm:block md:hidden lg:hidden">
   <CiUser className="h-4 w-4 text-gray-700" />
 </button>
-
+</Link>
 
   {/* Sign Up/Login Text (Visible on Large Screens) */}
+  <Link href='/Authentication'>   
   <span className="hidden lg:inline text-gray-700 text-xs font-semibold hover:text-orange-600 hover:underline">
     Sign Up/Login
   </span>
-</Link>
+  </Link>
 
           
           
