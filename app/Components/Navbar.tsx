@@ -186,21 +186,21 @@ const Navbar = () => {
 
       {/* Mobile Menu (Hidden by Default) */}
       {isMobileMenuOpen && (
-        <div className="lg:hidden  p-4">
+        <div className="g:hidden absolute top-24 left-0 w-full bg-white shadow-md p-4 z-50">
           <div className="flex flex-col space-y-4">
-            <a href="#" className="text-gray-700 hover:text-blue-600">
+            <a href="#" className="text-gray-700 ">
               Mens
             </a>
-            <a href="#" className="text-gray-700 hover:text-blue-600">
+            <a href="#" className="text-gray-700 ">
               Womens
             </a>
-            <a href="#" className="text-gray-700 hover:text-blue-600">
+            <a href="#" className="text-gray-700 ">
               Kids
             </a>
-            <a href="#" className="text-gray-700 hover:text-blue-600">
+            <a href="#" className="text-gray-700 ">
               Shop
             </a>
-            <a href="#" className="text-gray-700 hover:text-blue-600">
+            <a href="#" className="text-gray-700">
               Sales
             </a>
           </div>
