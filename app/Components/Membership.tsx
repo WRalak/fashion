@@ -5,7 +5,7 @@ import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import Image from "next/image";
 
 const ShopSection: React.FC = () => {
-  const genderImages = ["/pixels.png", "/shop female.webp", "/kids.webp"];
+  const genderImages = ["/pixels.png", "/Rectangle 42.jpg", "/Rectangle 142384.jpg"];
 
   const categoryImages = [
     { src: "/Rectangle 54.png", label: "Shoes" },
@@ -20,7 +20,7 @@ const ShopSection: React.FC = () => {
   const [categoryIndex, setCategoryIndex] = useState(0);
 
   return (
-    <div className="max-w-7xl gap-10 mx-auto p-4">
+    <div className="max-w-7xl mx-auto p-4">
       {/* Shop By Gender */}
       <div className="mb-8 relative">
         <div className="flex justify-between items-center mb-2">
@@ -28,13 +28,13 @@ const ShopSection: React.FC = () => {
           <div className="flex space-x-2">
             <button
               onClick={() => setGenderIndex((genderIndex - 1 + genderImages.length) % genderImages.length)}
-              className="text-orange-500 text-xs "
+              className="bg-orange-500 p-2 rounded-full text-white shadow-md"
             >
               <FaChevronLeft />
             </button>
             <button
               onClick={() => setGenderIndex((genderIndex + 1) % genderImages.length)}
-              className="text-orange-500 text-xs"
+              className="bg-orange-500 p-2 rounded-full text-white shadow-md"
             >
               <FaChevronRight />
             </button>
@@ -58,7 +58,7 @@ const ShopSection: React.FC = () => {
       {/* Solgate Membership Banner */}
       <div className="mb-8">
         <Image
-          src="/Group 521.jpg"
+          src="/Group-521.jpg"
           alt="Solgate Membership"
           width={885}
           height={210}
@@ -73,13 +73,13 @@ const ShopSection: React.FC = () => {
           <div className="flex space-x-2">
             <button
               onClick={() => setCategoryIndex((categoryIndex - 1 + categoryImages.length) % categoryImages.length)}
-              className="text-orange-500 text-xs"
+              className="bg-orange-500 p-2 rounded-full text-white shadow-md"
             >
               <FaChevronLeft />
             </button>
             <button
               onClick={() => setCategoryIndex((categoryIndex + 1) % categoryImages.length)}
-              className="text-orange-500 text-xs"
+              className="bg-orange-500 p-2 rounded-full text-white shadow-md"
             >
               <FaChevronRight />
             </button>
