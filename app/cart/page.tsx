@@ -1,110 +1,44 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
+
 "use client";
 
-import { useState } from "react";
-import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
-import Image from "next/image";
+import { useCart } from "../context/CartContext";
+import Link from "next/link";
 
-const ShopSection: React.FC = () => {
-  const genderImages = ["/pixels.png", "/Rectangle 42.jpg", "/Rectangle 142384.jpg"];
-
-  const categoryImages = [
-    { src: "/Rectangle 54.png", label: "Shoes" },
-    { src: "/Rectangle 303.jpg", label: "Jackets" },
-    { src: "/Rectangle 56.png", label: "Accessories" },
-    { src: "/Rectangle 300.jpg", label: "Tops" },
-    { src: "/pixels.png", label: "Bags" },e
-    { src: "/Rectangle 300.jpg", label: "Watches" },
-  ];
-
-  const [genderIndex, setGenderIndex] = useState(0);
-  const [categoryIndex, setCategoryIndex] = useState(0);
+export default function CartPage() {
+  const { cart, removeFromCart } = useCart();
 
   return (
-    <div className="max-w-7xl mx-auto p-4">
-      {/* Shop By Gender */}
-      <div className="mb-8 relative">
-        <div className="flex justify-between items-center mb-2">
-          <p className="text-lg font-semibold">Shop By Gender</p>
-          <div className="flex space-x-2">
-            <button
-              onClick={() => setGenderIndex((genderIndex - 1 + genderImages.length) % genderImages.length)}
-              className="bg-orange-500 p-2 rounded-full text-white shadow-md"
-            >
-              <FaChevronLeft />
-            </button>
-            <button
-              onClick={() => setGenderIndex((genderIndex + 1) % genderImages.length)}
-              className="bg-orange-500 p-2 rounded-full text-white shadow-md"
-            >
-              <FaChevronRight />
-            </button>
-          </div>
-        </div>
-
-        <div className="relative flex justify-center gap-4 overflow-hidden">
-          {genderImages.slice(genderIndex, genderIndex + 2).map((img, index) => (
-            <div key={index} className="relative w-[435px] h-[400px]">
-              <Image
-                src={img}
-                alt="gender"
-                fill
-                className="rounded-lg object-cover"
-              />
+    <div className="p-6">
+      <h1 className="text-2xl font-bold">Your Cart</h1>
+      {cart.length === 0 ? (
+        <p>Your cart is empty.</p>
+      ) : (
+        <div>
+          {cart.map((item) => (
+            <div key={item.id} className="flex justify-between border-b py-2">
+              <span>
+                {item.name} x {item.quantity}
+              </span>
+              <button
+                onClick={() => removeFromCart(item.id)}
+                className="text-red-600"
+              >
+                Remove
+              </button>
             </div>
           ))}
+          <Link
+            href="/checkout"
+            className="bg-black text-white px-6 py-2 mt-4 inline-block"
+          >
+            Proceed to Checkout
+          </Link>
         </div>
-      </div>
-
-      {/* Solgate Membership Banner */}
-      <div className="mb-8">
-        <Image
-          src="/Group 521.jpg"
-          alt="Solgate Membership"
-          width={885}
-          height={210}
-          className="w-full rounded-lg"
-        />
-      </div>
-
-      {/* Shop By Category */}
-      <div className="relative">
-        <div className="flex justify-between items-center mb-2">
-          <p className="text-lg font-semibold">Shop By Category</p>
-          <div className="flex space-x-2">
-            <button
-              onClick={() => setCategoryIndex((categoryIndex - 1 + categoryImages.length) % categoryImages.length)}
-              className="text-orange-500 p-2 text-xs"
-            >
-              <FaChevronLeft />
-            </button>
-            <button
-              onClick={() => setCategoryIndex((categoryIndex + 1) % categoryImages.length)}
-              className="text-orange-500 p-2 text-xs"
-            >
-              <FaChevronRight />
-            </button>
-          </div>
-        </div>
-
-        <div className="relative flex justify-center gap-4 overflow-hidden">
-          {categoryImages.slice(categoryIndex, categoryIndex + 4).map((item, index) => (
-            <div key={index} className="text-center w-[210px]">
-              <Image
-                src={item.src}
-                alt={item.label}
-                width={210}
-                height={210}
-                className="rounded-lg object-cover"
-              />
-              <p className="text-sm mt-2">{item.label}</p>
-            </div>
-          ))}
-        </div>
-      </div>
+      )}
     </div>
   );
-};
+}
 
-export default ShopSection;
 
 

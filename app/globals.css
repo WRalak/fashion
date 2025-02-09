@@ -65,3 +65,11 @@
   }
 }
 
+#nprogress .bar {
+  background: #ff5733 !important; /* Change color */
+  height: 6px !important; /* Adjust height */
+}
+
+#nprogress .peg {
+  box-shadow: 0 0 10px #ff5733, 0 0 5px #ff5733;
+}

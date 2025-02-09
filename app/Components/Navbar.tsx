@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import Image from 'next/image';
 import { BiSearch } from "react-icons/bi";
 
@@ -14,8 +14,17 @@ import { IoBagOutline } from "react-icons/io5";
 import { BsXLg } from "react-icons/bs";
 import { CiUser } from "react-icons/ci";// or 'react-icons/hi2'
 import Link from 'next/link';
+import { WishlistContext } from "../context/WishlistContext";
+import { useCart } from "../context/CartContext";
 
 const Navbar = () => {
+
+
+
+  
+
+  const { wishlist = [] } = useContext(WishlistContext) || {};
+  const { cart } = useCart();
   const [isHelpOpen, setIsHelpOpen] = useState(false);
   const [isShopOpen, setIsShopOpen] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
@@ -24,7 +33,7 @@ const Navbar = () => {
   return (
     <nav className="bg-white space-x-4  w-full max-w-screen-lg mx-auto " >
       {/* Top Section */}
-      <div className="bg-gray-100 py-2 px-4 z-50 flex justify-end space-x-4 w-full max-w-screen-lg mx-auto ">
+      <div className=' bg-slate-100 py-2   max-w-screen-lg mx-auto flex justify-end space-x-4' >
      <div className='items-center flex text-gray-500'> <BsTelephone  className='text-xs'/>
 
 <p className='text-xs mr-4'>+254718600199</p></div>
@@ -122,27 +131,28 @@ const Navbar = () => {
 
         {/* Logo (Centered) */}
         <div className="flex items-center gap-4 justify-center text-sm font-bold flex-grow lg:flex-grow-0">
-  <Image src="/logo.png" alt="Logo" width={100} height={70} className="" />
-  
+                <Link href={'/'}>
+                <Image src="/logo.png" alt="Logo" width={100} height={70} className="" />
+                </Link>
 
 
 
         {/* Nav Links (Hidden on Small Screens) */}
         <div className="hidden  lg:flex space-x-4">
         
-          <a href="#" className="text-gray-700 font-thin text-xs ">
+          <Link href="#" className="text-gray-700 font-bold text-xs ">
             Mens
-          </a>
-          <a href="#" className="text-gray-700 font-thin text-xs ">
+          </Link>
+          <a href="#" className="text-gray-700 font-bold text-xs ">
             Womens
           </a>
-          <a href="#" className="text-gray-700 font-thin text-xs">
+          <a href="#" className="text-gray-700 font-bold text-xs">
             Kids
           </a>
-          <a href="#" className="text-gray-700 font-thin text-xs">
+          <a href="#" className="text-gray-700 font-bold text-xs">
             Shop
           </a>
-          <a href="#" className="text-gray-700 font-thin text-xs ">
+          <a href="#" className="text-gray-700 font-bold text-xs ">
             Sales
           </a>
         </div>
@@ -170,14 +180,24 @@ const Navbar = () => {
           
 
           {/* Notification Icon */}
-          <Link href={''}>
-            <CiHeart className="h-4 w-4 text-gray-700" />
+          <Link href="/Wishlist" className="relative">
+            <CiHeart className="text-xl" />
+            {wishlist.length > 0 && (
+              <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs font-bold px-2 py-1 rounded-full">
+                {wishlist.length}
+              </span>
+            )}
           </Link>
 
           {/* Cart Icon */}
-          <button>
-            <IoBagOutline className="h-4 w-4 text-gray-700" />
-          </button>
+          <Link href="/cart" className="relative">
+            <IoBagOutline className="text-xl " />
+            {cart?.length > 0 && (
+              <span className="absolute -top-2 -right-2 bg-green-500 text-white text-xs font-bold px-2 py-1 rounded-full">
+                {cart.length}
+              </span>
+            )}
+          </Link>
             {/* Search Icon */}
             <button onClick={() => setIsSearchOpen(!isSearchOpen)}>
             <BiSearch className="h-4 w-4 text-gray-700" />

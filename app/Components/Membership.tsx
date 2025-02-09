@@ -1,4 +1,5 @@
-"use client";
+
+  "use client";
 
 import { useState } from "react";
 import Image from "next/image";
@@ -29,7 +30,7 @@ const ShopByGender = () => {
   return (
     <div className="max-w-screen-lg mx-auto mt-10 p-4 flex flex-col items-start">
       {/* Membership Title */}
-      <p className="text-lg  mb-4">Solgates Membership</p>
+      <p className="text-lg mb-4">Solgates Membership</p>
 
       {/* Membership Image */}
       <div className="w-full">
@@ -43,48 +44,62 @@ const ShopByGender = () => {
       </div>
 
       {/* Shop by Gender Title & Navigation Icons */}
-      <div className="flex justify-between items-center w-full max-w-md ml-10 mt-12 ">
-        <p className="text-lg mb-4 ">Shop by Gender</p>
+      <div className="flex justify-between items-center w-full mt-8">
+        <p className="text-lg">Shop by Gender</p>
         <div className="flex gap-4 lg:hidden">
-          <button onClick={prevSlide} className="text-orange-500 p-1 text-xs rounded-full bg-gray-100">
+          <button
+            onClick={prevSlide}
+            className="text-orange-500 p-2 rounded-full bg-gray-100 shadow-md"
+          >
             <FaChevronLeft />
           </button>
-          <button onClick={nextSlide} className="text-orange-500 p-1 text-xs rounded-full bg-gray-100">
+          <button
+            onClick={nextSlide}
+            className="text-orange-500 p-2 rounded-full bg-gray-100 shadow-md"
+          >
             <FaChevronRight />
           </button>
         </div>
       </div>
 
       {/* Images Display */}
-      <div className="relative flex gap-6 justify-start">
-        {getDisplayedImages().map((image, idx) => (
-          <div key={idx} className="flex flex-col items-start relative">
-            <Image
-              src={image.src}
-              alt={image.alt}
-              width={435}
-              height={400}
-              className="rounded-lg object-cover"
-            />
-            <p className="text-xs font-medium mt-2">{image.label}</p>
+      <div className="relative w-full overflow-hidden mt-4">
+        <div className="flex gap-4 transition-transform duration-300 ease-in-out">
+          {getDisplayedImages().map((image, idx) => (
+            <div key={idx} className="flex flex-col items-center w-full sm:w-1/2">
+              <Image
+                src={image.src}
+                alt={image.alt}
+                width={300}
+                height={350}
+                className="rounded-lg object-cover w-full max-w-xs sm:max-w-sm"
+              />
+              <p className="text-xs font-medium mt-2">{image.label}</p>
+            </div>
+          ))}
+        </div>
+      </div>
 
-            {/* Show navigation icons on the last image only on large screens */}
-            {idx === 1 && (
-              <div className="hidden lg:flex absolute top-[-38] right-4 gap-4">
-                <button onClick={prevSlide} className="text-orange-500 p-1 text-xs rounded-full bg-gray-100">
-                  <FaChevronLeft />
-                </button>
-                <button onClick={nextSlide} className="text-orange-500 p-1 text-xs rounded-full bg-gray-100">
-                  <FaChevronRight />
-                </button>
-              </div>
-            )}
-          </div>
-        ))}
+      {/* Navigation buttons for larger screens */}
+      <div className="hidden lg:flex justify-center gap-6 mt-4">
+        <button
+          onClick={prevSlide}
+          className="text-orange-500 p-2 rounded-full bg-gray-100 shadow-md"
+        >
+          <FaChevronLeft />
+        </button>
+        <button
+          onClick={nextSlide}
+          className="text-orange-500 p-2 rounded-full bg-gray-100 shadow-md"
+        >
+          <FaChevronRight />
+        </button>
       </div>
     </div>
   );
 };
 
 export default ShopByGender;
+
+
 
