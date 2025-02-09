@@ -1,7 +1,7 @@
 'use client'
 
 import React, { useState } from "react";
-import {  FaEye, FaUser, FaPhone,  } from "react-icons/fa";
+import {  FaEye,  FaPhone,  } from "react-icons/fa";
 import { FaRegEnvelopeOpen } from "react-icons/fa";
 import { CiLock } from "react-icons/ci";
 import { IoEyeOutline } from "react-icons/io5";
