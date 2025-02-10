@@ -1,5 +1,7 @@
 import Image from "next/image";
 import Membership from "../app/Components/Membership";
+import Shop from "../app/Components/Shop";
+
 
 export default function Home() {
   return (
@@ -11,6 +13,7 @@ export default function Home() {
         width={885}
         height={250}
       />
+      <Shop/>
       <Membership />
     </div>
   );

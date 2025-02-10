@@ -107,10 +107,10 @@ const Navbar = () => {
   >
     Cancel
   </button>
-  <button
+  <button 
     className="px-12 py-4 text-xs font-medium text-white bg-orange-600 rounded"
   >
-    Create Account
+     <Link  href={'/Seller'}>Create Account </Link>
   </button>
 
               </div>

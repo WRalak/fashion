@@ -1,5 +1,4 @@
-
-  "use client";
+"use client";
 
 import { useState } from "react";
 import Image from "next/image";
@@ -43,63 +42,44 @@ const ShopByGender = () => {
         />
       </div>
 
-      {/* Shop by Gender Title & Navigation Icons */}
+      {/* Shop by Gender Title */}
       <div className="flex justify-between items-center w-full mt-8">
         <p className="text-lg">Shop by Gender</p>
-        <div className="flex gap-4 lg:hidden">
-          <button
-            onClick={prevSlide}
-            className="text-orange-500 p-2 rounded-full bg-gray-100 shadow-md"
-          >
-            <FaChevronLeft />
-          </button>
-          <button
-            onClick={nextSlide}
-            className="text-orange-500 p-2 rounded-full bg-gray-100 shadow-md"
-          >
-            <FaChevronRight />
-          </button>
-        </div>
       </div>
 
       {/* Images Display */}
-      <div className="relative w-full overflow-hidden mt-4">
-        <div className="flex gap-4 transition-transform duration-300 ease-in-out">
-          {getDisplayedImages().map((image, idx) => (
-            <div key={idx} className="flex flex-col items-center w-full sm:w-1/2">
-              <Image
-                src={image.src}
-                alt={image.alt}
-                width={300}
-                height={350}
-                className="rounded-lg object-cover w-full max-w-xs sm:max-w-sm"
-              />
-              <p className="text-xs font-medium mt-2">{image.label}</p>
-            </div>
-          ))}
-        </div>
-      </div>
+      <div className="relative w-full flex gap-6 mt-4">
+        {getDisplayedImages().map((image, idx) => (
+          <div key={idx} className="relative flex flex-col items-center w-full sm:w-1/2">
+            <Image
+              src={image.src}
+              alt={image.alt}
+              width={435}
+              height={400}
+              className="rounded-lg object-cover w-full max-w-xs sm:max-w-sm"
+            />
+            <p className="text-xs font-medium mt-2">{image.label}</p>
 
-      {/* Navigation buttons for larger screens */}
-      <div className="hidden lg:flex justify-center gap-6 mt-4">
-        <button
-          onClick={prevSlide}
-          className="text-orange-500 p-2 rounded-full bg-gray-100 shadow-md"
-        >
-          <FaChevronLeft />
-        </button>
-        <button
-          onClick={nextSlide}
-          className="text-orange-500 p-2 rounded-full bg-gray-100 shadow-md"
-        >
-          <FaChevronRight />
-        </button>
+            {/* Navigation buttons positioned at the top-right of the right image */}
+            {idx === 1 && (
+              <div className="absolute top-0 right-0 transform -translate-y-full  flex gap-2">
+                <button onClick={prevSlide} className="text-orange-500 text-xs ">
+                  <FaChevronLeft />
+                </button>
+                <button onClick={nextSlide} className="text-orange-500 text-xs">
+                  <FaChevronRight />
+                </button>
+              </div>
+            )}
+          </div>
+        ))}
       </div>
     </div>
   );
 };
 
 export default ShopByGender;
+
 
 
 

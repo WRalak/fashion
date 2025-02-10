@@ -15,7 +15,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <CartProvider>
           <WishlistProvider> {/* ✅ Wrap entire app */}
             
-            <main className="space-x-4 w-full max-w-screen-lg mx-auto ">
+            <main className=" ">
             <Navbar />
             <LoadingBar/>
               {children}
