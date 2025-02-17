@@ -1,6 +1,8 @@
+
+
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Image from "next/image";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 
@@ -12,6 +14,17 @@ const ShopByGender = () => {
   ];
 
   const [index, setIndex] = useState(0);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+
+    handleResize();
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   const nextSlide = () => {
     setIndex((prevIndex) => (prevIndex + 1) % images.length);
@@ -22,8 +35,7 @@ const ShopByGender = () => {
   };
 
   const getDisplayedImages = () => {
-    if (images.length < 2) return images;
-    return [images[index], images[(index + 1) % images.length]];
+    return isMobile ? [images[index]] : [images[index], images[(index + 1) % images.length]];
   };
 
   return (
@@ -38,39 +50,35 @@ const ShopByGender = () => {
           alt="Membership"
           width={885}
           height={210}
-          className="rounded-lg object-cover"
+          className="rounded-sm object-cover w-full"
         />
       </div>
 
-      {/* Shop by Gender Title */}
+      {/* Shop by Gender Title + Navigation Icons */}
       <div className="flex justify-between items-center w-full mt-8">
         <p className="text-lg">Shop by Gender</p>
+        <div className="flex gap-4">
+          <button onClick={prevSlide} className="text-orange-500 text-xs">
+            <FaChevronLeft />
+          </button>
+          <button onClick={nextSlide} className="text-orange-500 text-xs">
+            <FaChevronRight />
+          </button>
+        </div>
       </div>
 
-      {/* Images Display */}
-      <div className="relative w-full flex gap-6 mt-4">
+      {/* Images Display - Flex Layout */}
+      <div className="relative w-full flex flex-row gap-6 mt-4">
         {getDisplayedImages().map((image, idx) => (
-          <div key={idx} className="relative flex flex-col items-center w-full sm:w-1/2">
+          <div key={idx} className="relative flex flex-col items-center flex-1">
             <Image
               src={image.src}
               alt={image.alt}
               width={435}
               height={400}
-              className="rounded-lg object-cover w-full max-w-xs sm:max-w-sm"
+              className="rounded-lg object-cover w-full h-[400px]"
             />
             <p className="text-xs font-medium mt-2">{image.label}</p>
-
-            {/* Navigation buttons positioned at the top-right of the right image */}
-            {idx === 1 && (
-              <div className="absolute top-0 right-0 transform -translate-y-full  flex gap-2">
-                <button onClick={prevSlide} className="text-orange-500 text-xs ">
-                  <FaChevronLeft />
-                </button>
-                <button onClick={nextSlide} className="text-orange-500 text-xs">
-                  <FaChevronRight />
-                </button>
-              </div>
-            )}
           </div>
         ))}
       </div>
@@ -79,6 +87,12 @@ const ShopByGender = () => {
 };
 
 export default ShopByGender;
+
+
+
+
+
+
 
 
 

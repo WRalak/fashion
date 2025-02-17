@@ -33,7 +33,7 @@ const Navbar = () => {
   return (
     <nav className="bg-white space-x-4  w-full max-w-screen-lg mx-auto " >
       {/* Top Section */}
-      <div className=' bg-slate-100 py-2   max-w-screen-lg mx-auto flex justify-end space-x-4' >
+      <div className=' bg-slate-100 py-2   max-w-screen-lg mx-auto flex justify-end space-x-4 lg:mr-20' >
      <div className='items-center flex text-gray-500'> <BsTelephone  className='text-xs'/>
 
 <p className='text-xs mr-4'>+254718600199</p></div>
@@ -82,12 +82,12 @@ const Navbar = () => {
         </div>
 
         {/* Open Shop Icon */}
-        <div className="relative">
+        <div className="relative ">
           <button
             onClick={() => setIsShopOpen(!isShopOpen)}
             className="flex items-center space-x-1"
           >
-            <AiOutlineShop className="h-4 w-4 text-orange-500" />
+            <AiOutlineShop className="h-4 w-4 text-orange-500 " />
             <span className="text-xs text-orange-500">Open Shop</span>
           </button>
           {isShopOpen && (
@@ -130,7 +130,7 @@ const Navbar = () => {
         </button>
 
         {/* Logo (Centered) */}
-        <div className="flex items-center gap-4 justify-center text-sm font-bold flex-grow lg:flex-grow-0">
+        <div className="flex items-center gap-4 justify-center text-sm font-bold flex-grow lg:flex-grow-0 lg:ml-8">
                 <Link href={'/'}>
                 <Image src="/logo.png" alt="Logo" width={100} height={70} className="" />
                 </Link>
@@ -143,23 +143,23 @@ const Navbar = () => {
           <Link href="#" className="text-gray-700 font-bold text-xs ">
             Mens
           </Link>
-          <a href="#" className="text-gray-700 font-bold text-xs ">
+          <Link href="#" className="text-gray-700 font-bold text-xs ">
             Womens
-          </a>
-          <a href="#" className="text-gray-700 font-bold text-xs">
+          </Link>
+          <Link href="#" className="text-gray-700 font-bold text-xs">
             Kids
-          </a>
-          <a href="#" className="text-gray-700 font-bold text-xs">
+          </Link>
+          <Link href="#" className="text-gray-700 font-bold text-xs">
             Shop
-          </a>
-          <a href="#" className="text-gray-700 font-bold text-xs ">
+          </Link>
+          <Link href="#" className="text-gray-700 font-bold text-xs ">
             Sales
-          </a>
+          </Link>
         </div>
         </div>
 
         {/* Icons (Right) */}
-        <div className="flex items-center space-x-4">
+        <div className="flex items-center space-x-4 lg:mr-20">
         
 
           {/* User Icon */}
@@ -209,21 +209,21 @@ const Navbar = () => {
       {isMobileMenuOpen && (
         <div className="g:hidden absolute top-24 left-0 w-full bg-white shadow-md p-4 z-50">
           <div className="flex flex-col space-y-4">
-            <a href="#" className="text-gray-700 ">
+            <Link href="#" className="text-gray-700 ">
               Mens
-            </a>
-            <a href="#" className="text-gray-700 ">
+            </Link>
+            <Link href="#" className="text-gray-700 ">
               Womens
-            </a>
-            <a href="#" className="text-gray-700 ">
+            </Link>
+            <Link href="#" className="text-gray-700 ">
               Kids
-            </a>
-            <a href="#" className="text-gray-700 ">
+            </Link>
+            <Link href="#" className="text-gray-700 ">
               Shop
-            </a>
-            <a href="#" className="text-gray-700">
+            </Link>
+            <Link href="#" className="text-gray-700">
               Sales
-            </a>
+            </Link>
           </div>
         </div>
       )}

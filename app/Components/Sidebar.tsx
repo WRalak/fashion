@@ -24,6 +24,7 @@ const Sidebar = () => {
   const pathname = usePathname(); // Get current page path
 
   const menuItems = [
+    { name: "Dashboard", path: "/Dashboard", icon: <FiBox /> },
     { name: "Products", path: "/Products", icon: <FiBox /> },
     { name: "Orders", path: "/Orders", icon: <FiShoppingCart /> },
     { name: "Bids", path: "/Bids", icon: <FiTag /> },
@@ -52,7 +53,7 @@ const Sidebar = () => {
         } md:translate-x-0 transition-transform duration-300 ease-in-out z-40 md:relative`}
       >
         
-        <nav className="space-y-2">
+        <nav className="space-y-2 h-[100vh] ">
           {menuItems.map((item) => (
             <Link
               key={item.name}
@@ -72,6 +73,5 @@ const Sidebar = () => {
 };
 
 export default Sidebar;
-
 
 

@@ -1,5 +1,5 @@
-'use client';
 
+'use client'
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import Image from "next/image";
@@ -10,42 +10,40 @@ interface ShopOwner {
   image: string;
 }
 
-const Home = () => {
+export default function Home() {
   const [shopOwners, setShopOwners] = useState<ShopOwner[]>([]);
 
   useEffect(() => {
-    fetch("/api/shopOwners")
+    fetch("/api/products")
       .then((res) => res.json())
-      .then((data: ShopOwner[]) => setShopOwners(data));
+      .then((data) => setShopOwners(data.shopOwners));
   }, []);
 
   return (
-    <div className="max-w-7xl mx-auto py-10 px-4">
-      <h1 className="text-2xl font-bold mb-6 text-center">Who&apos;s Your Plug?</h1>
-
-      <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+    <div className="max-w-screen-lg mx-auto  p-4 flex  items-start">
+      <h1 className="text-lg  mb-4">Who&apos;s your plug?</h1>
+      <div className="grid grid-cols-2 gap-4">
         {shopOwners.map((owner) => (
-          <Link 
-            key={owner.id} 
-            href={`/shop/${owner.id}`} 
-            className="border rounded-lg p-4 shadow-md text-center hover:shadow-lg transition"
-            aria-label={`View ${owner.name}'s shop`}
-          >
-            <Image 
-              src={owner.image} 
-              alt={`${owner.name}'s profile`} 
-              width={128} 
-              height={128} 
-              className="w-32 h-32 mx-auto rounded-full object-cover"
-              loading="lazy"
-            />
-            <h2 className="mt-2 font-bold text-lg">{owner.name}</h2>
+          <Link key={owner.id} href={`/shop/${owner.id}`} className="block">
+            <div className="border p-4 rounded-lg shadow-lg text-center">
+              <Image src={owner.image} alt={owner.name} className="w-24 h-24 mx-auto rounded-full mb-2" />
+              <h2 className="text-lg font-semibold">{owner.name}</h2>
+            </div>
           </Link>
         ))}
       </div>
     </div>
   );
-};
+}
 
-export default Home;
+
+
+
+
+
+
+
+
+
+
 

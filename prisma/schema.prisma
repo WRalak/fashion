@@ -1,72 +1,31 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
-// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
 
 
 
-
-model Shop {
-  id        String   @id @default(auto()) @map("_id")
-  name      String
-  ownerId   String
-  ownerName String
-  image     String  // Shop profile image
-  products  Product[]
-  createdAt DateTime @default(now())
+generator client {
+  provider = "prisma-client-js"
 }
 
-model Product {
-  id        String  @id @default(auto()) @map("_id")
-  name      String
-  description String
-  price     Float
-  image     String
-  shopId    String
-  shop      Shop    @relation(fields: [shopId], references: [id])
-  createdAt DateTime @default(now())
-}
-
-
-model Order {
-  id        String   @id @default(auto()) @map("_id")
-  productId String
-  shopId    String
-  customerId String
-  status    String   @default("Pending")
-  totalAmount Float
-  createdAt DateTime @default(now())
-}
-
-model Bid {
-  id        String   @id @default(auto()) @map("_id")
-  productId String
-  userId    String
-  bidAmount Float
-  createdAt DateTime @default(now())
-}
-
-model Customer {
-  id        String   @id @default(auto()) @map("_id")
-  name      String
-  email     String  @unique
-  createdAt DateTime @default(now())
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
 }
 
 
 
-model Loan {
-  id        String   @id @default(auto()) @map("_id")
-  shopId    String
-  amount    Float
-  status    String   @default("Pending")
-  createdAt DateTime @default(now())
+
+
+model User {
+  id       String  @id @default(uuid()) @map("_id")
+  email    String  @unique
+  password String
+  role     Role
 }
 
-model PickUpRequest {
-  id        String   @id @default(auto()) @map("_id")
-  orderId   String
-  status    String   @default("Pending")
-  createdAt DateTime @default(now())
+enum Role {
+  ADMIN
+  SHOP_OWNER
+  BUYER
 }
+
+
+
