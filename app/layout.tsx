@@ -1,5 +1,3 @@
-
-
 'use client';
 
 import { WishlistProvider } from "./context/WishlistContext";
@@ -14,17 +12,17 @@ import { AuthProvider } from "./context/AuthContext";
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en">
-      <body>
+    <html lang="en" className=" w-full">
+      <body className=" h-screen w-full flex flex-col">
         <AuthProvider>
           <SessionProvider>   
             <SearchProvider>
               <CartProvider>
-                <WishlistProvider> {/* ✅ Wrap entire app */}
-                  <main>
+                <WishlistProvider>
+                  <main className="flex-1 w-full  flex flex-col">
                     <Navbar />
                     <LoadingBar />
-                    {children}
+                    <div className="flex-1">{children}</div>
                     <Footer />
                   </main>
                 </WishlistProvider>
@@ -36,4 +34,5 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     </html>
   );
 }
+
 

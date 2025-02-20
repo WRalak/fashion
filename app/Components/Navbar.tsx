@@ -1,3 +1,6 @@
+
+
+
 'use client'
 
 import { useContext, useState } from 'react';
@@ -6,12 +9,12 @@ import { BiSearch } from "react-icons/bi";
 
 import { IoMdHelpCircleOutline } from "react-icons/io";
 import { BsTelephone } from "react-icons/bs";
-import { AiOutlineShop } from "react-icons/ai";
 import { AiTwotoneAlert } from "react-icons/ai"; 
 import { RiMenu4Line } from "react-icons/ri";
 import { CiHeart } from "react-icons/ci";
 import { IoBagOutline } from "react-icons/io5";
 import { BsXLg } from "react-icons/bs";
+import { RiStore2Fill } from "react-icons/ri";
 import { CiUser } from "react-icons/ci";// or 'react-icons/hi2'
 import Link from 'next/link';
 import { WishlistContext } from "../context/WishlistContext";
@@ -34,9 +37,9 @@ const Navbar = () => {
     <nav className="bg-white space-x-4  w-full max-w-screen-lg mx-auto " >
       {/* Top Section */}
       <div className=' bg-slate-100 py-2   max-w-screen-lg mx-auto flex justify-end space-x-4 lg:mr-20' >
-     <div className='items-center flex text-gray-500'> <BsTelephone  className='text-xs'/>
+     <div className='items-center flex text-gray-500'> <BsTelephone  className='text-xs mr-2'/>
 
-<p className='text-xs mr-4'>+254718600199</p></div>
+<p className='text-[10px] mr-'>+254718600199</p></div>
 <span className='text-xs text-slate-400'>|</span>
         {/* Help Icon */}
         <div className="relative">
@@ -45,7 +48,7 @@ const Navbar = () => {
             className="flex items-center space-x-1"
           >
             <IoMdHelpCircleOutline className="h-3 w-3 text-gray-500" />
-            <span className="text-xs text-gray-500">Help</span>
+            <span className="text-[10px] text-gray-500">Help</span>
             <span className='text-xs text-slate-400'>|</span>
           </button>
           {isHelpOpen && (
@@ -87,8 +90,8 @@ const Navbar = () => {
             onClick={() => setIsShopOpen(!isShopOpen)}
             className="flex items-center space-x-1"
           >
-            <AiOutlineShop className="h-4 w-4 text-orange-500 " />
-            <span className="text-xs text-orange-500">Open Shop</span>
+            <RiStore2Fill className="h-4 w-4 text-orange-500 " />
+            <span className="text-[10px] text-orange-500">Open Shop</span>
           </button>
           {isShopOpen && (
             <div className="absolute right-0 mt-2 w-[380px] h-[207px] bg-white z-50 border border-gray-200 rounded-lg shadow-lg p-4">
@@ -138,7 +141,7 @@ const Navbar = () => {
 
 
         {/* Nav Links (Hidden on Small Screens) */}
-        <div className="hidden  lg:flex space-x-4">
+        <div className="hidden  lg:flex space-x-6">
         
           <Link href="#" className="text-gray-700 font-bold text-xs ">
             Mens
@@ -207,7 +210,7 @@ const Navbar = () => {
 
       {/* Mobile Menu (Hidden by Default) */}
       {isMobileMenuOpen && (
-        <div className="g:hidden absolute top-24 left-0 w-full bg-white shadow-md p-4 z-50">
+        <div className="lg:hidden absolute top-24 left-[-17px] w-full bg-white shadow-md p-4 z-50">
           <div className="flex flex-col space-y-4">
             <Link href="#" className="text-gray-700 ">
               Mens

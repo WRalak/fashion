@@ -1,3 +1,5 @@
+
+
 "use client";
 
 import { useWishlist } from "../context/WishlistContext";
@@ -18,12 +20,12 @@ const Wishlist = () => {
           {wishlist.map((product) => (
             <div
               key={product.id}
-              className="border rounded-lg p-4 shadow-md hover:shadow-lg transition duration-300 relative"
+              className=" relative"
             >
               {/* Wishlist Remove Icon */}
               <button
                 onClick={() => removeFromWishlist(product.id)}
-                className="absolute top-2 right-2 text-red-500 text-xl"
+                className="absolute top-2 right-2 text-red-500 text-sm"
               >
                 <AiFillHeart />
               </button>
@@ -32,14 +34,14 @@ const Wishlist = () => {
               <Image
                 src={product.image}
                 alt={product.name}
-                height={200}
-                width={200}
-                className="w-full h-48 object-cover rounded-md"
+                height={100}
+                width={100}
+                className="w-full h-48 object-cover "
               />
 
               {/* Product Details */}
-              <h2 className="text-lg font-bold mt-2">{product.name}</h2>
-              <p className="text-gray-600">${product.price.toFixed(2)}</p>
+              <h2 className="text-sm font-bold mt-2">{product.name}</h2>
+              <p className="text-gray-600">KES{product.price.toFixed(2)}</p>
             </div>
           ))}
         </div>
@@ -49,5 +51,7 @@ const Wishlist = () => {
 };
 
 export default Wishlist;
+
+
 
 
