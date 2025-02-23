@@ -1,3 +1,6 @@
+
+
+
 'use client';
 import React, { useState } from 'react';
 import { useCart } from '../context/CartContext';
@@ -5,7 +8,7 @@ import { useWishlist } from '../context/WishlistContext';
 import Image from 'next/image';
 import { CiHeart } from "react-icons/ci";
 import { useRouter } from 'next/navigation';
-import {  FaChevronLeft, FaChevronRight } from 'react-icons/fa';
+import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
 
 // Define Product type
 type Product = {
@@ -54,47 +57,44 @@ const MostPopular = () => {
   };
 
   return (
-    <div className="my-6 px-6">
+    <div className="my-6 px-4 max-w-[885px] mx-auto">
       {/* Header with Navigation */}
-      <div className="flex justify-between items-center mb-4">
+      <div className="flex justify-between items-center mb-2">
         <h4 className="text-lg">Popular Right Now</h4>
-        <div className="flex space-x-2">
-          <button
-            onClick={handlePrev}
-            className="p-2 text-xs"
-          >
-            <FaChevronLeft size={10} className='text-orange-500'/>
+        <div className="flex space-x-1 max-w-[985px]">
+          <button onClick={handlePrev} className="p-1">
+            <FaChevronLeft size={12} className="text-orange-500" />
           </button>
-          <button
-            onClick={handleNext}
-            className="p-2 text-xs  "
-          >
-            <FaChevronRight size={10} className='text-orange-500' />
+          <button onClick={handleNext} className="p-1">
+            <FaChevronRight size={12} className="text-orange-500" />
           </button>
         </div>
       </div>
 
       {/* Product List - Responsive Grid Layout */}
-      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
         {displayedProducts.map((product) => (
           <div key={product.id} className="relative">
             {/* Wishlist Button */}
             <button
               onClick={() => addToWishlist(product)}
-              className="absolute top-2 right-2 text-gray-700 "
+              className="absolute top-2 right-2 text-gray-700"
             >
               <CiHeart size={16} className="text-black" />
             </button>
 
             {/* Product Image */}
             <Image
-              src={product.image}
-              alt={product.name}
-              height={200}
-              width={200}
-              className="w-full h-48 object-cover cursor-pointer rounded-lg"
-              onClick={() => handleImageClick(product)}
-            />
+  src={product.image}
+  alt={product.name}
+  className="w-full aspect-[3/4] object-cover cursor-pointer rounded"
+  width={885} 
+  height={700}  // Increased height
+  onClick={() => handleImageClick(product)}
+/>
+
+
+
 
             {/* Product Info */}
             <div className="p-2">
@@ -110,22 +110,3 @@ const MostPopular = () => {
 };
 
 export default MostPopular;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

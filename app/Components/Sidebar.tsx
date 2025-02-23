@@ -4,35 +4,36 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { usePathname } from "next/navigation"; // To check active link
+import { usePathname } from "next/navigation";
+import { GoHome } from "react-icons/go";
+import { LuShirt } from "react-icons/lu";
+import { GrGroup } from "react-icons/gr";
+import { VscArrowSwap } from "react-icons/vsc";
+import { PiShirtFoldedLight, PiHandCoins } from "react-icons/pi";
+ // To check active link
 import {
   FiMenu,
   FiX,
-  FiBox,
-  FiShoppingCart,
-  FiTag,
-  FiUsers,
-  FiHome,
-  FiCreditCard,
-  FiTruck,
-  FiDollarSign,
+ 
   FiSettings,
 } from "react-icons/fi";
+import { RiArchiveLine, RiStore2Line } from "react-icons/ri";
+import { CiFlag1 } from "react-icons/ci";
 
 const Sidebar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const pathname = usePathname(); // Get current page path
 
   const menuItems = [
-    { name: "Dashboard", path: "/Dashboard", icon: <FiBox /> },
-    { name: "Products", path: "/Products", icon: <FiBox /> },
-    { name: "Orders", path: "/Orders", icon: <FiShoppingCart /> },
-    { name: "Bids", path: "/Bids", icon: <FiTag /> },
-    { name: "Customers", path: "/Customers", icon: <FiUsers /> },
-    { name: "Shops", path: "/Shops", icon: <FiHome /> },
-    { name: "Loans", path: "/Loans", icon: <FiCreditCard /> },
-    { name: "Pick Up Requests", path: "/Pick-Up", icon: <FiTruck /> },
-    { name: "Mpesa Transactions", path: "/Mpesa", icon: <FiDollarSign /> },
+    { name: "Dashboard", path: "/Dashboard", icon: <GoHome /> },
+    { name: "Products", path: "/Products", icon: <LuShirt  /> },
+    { name: "Orders", path: "/Orders", icon: <RiArchiveLine /> },
+    { name: "Bids", path: "/Bids", icon: <CiFlag1 /> },
+    { name: "Customers", path: "/Customers", icon: <GrGroup /> },
+    { name: "Shop", path: "/Shop", icon: <RiStore2Line /> },
+    { name: "Loans", path: "/Loans", icon: <PiHandCoins /> },
+    { name: "Pick Up Requests", path: "/Pick-Up", icon: <PiShirtFoldedLight /> },
+    { name: "Mpesa Transactions", path: "/Mpesa", icon: <VscArrowSwap /> },
     { name: "Settings", path: "/Settings", icon: <FiSettings /> },
   ];
 
@@ -53,12 +54,12 @@ const Sidebar = () => {
         } md:translate-x-0 transition-transform duration-300 ease-in-out z-40 md:relative`}
       >
         
-        <nav className="space-y-2 h-[100vh] ">
+        <nav className="space-y-2 h-[100vh] pl-10 ">
           {menuItems.map((item) => (
             <Link
               key={item.name}
               href={item.path}
-              className={`flex items-center text-xs gap-8  rounded transition ${
+              className={`flex items-center text-sm text-gray-700 gap-8  rounded transition ${
                 pathname === item.path ? "text-orange-500 " : ""
               }`}
             >

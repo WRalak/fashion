@@ -17,7 +17,7 @@ const OrderConfirmationPage = () => {
       <div className="mt-4">
         <button
           onClick={handleContinueShopping}
-          className="w-full p-3 bg-orange-600  rounded text-white  "
+          className=" text-sm p-3 bg-orange-600  rounded text-white  "
         >
           Continue Shopping
         </button>

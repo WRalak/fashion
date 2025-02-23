@@ -54,27 +54,27 @@ const Navbar = () => {
           {isHelpOpen && (
             <div className="absolute right-0 mt-2 w-[380px] h-[400px] z-50  bg-white border border-gray-200 rounded-lg p-6">
               <div className="flex justify-between items-center mb-4">
-                <h3 className="font-semibold">Help</h3>
+                <h3 className="font-semibold text-sm">Help</h3>
                 <button onClick={() => setIsHelpOpen(false)}>
                   <BsXLg className="h-3 w-3 text-black" />
                 </button>
                 
               </div>
               <hr  className='text-gray-400'/>
-              <p className='text-xs text-gray-700 font-extralight mb-4'>How can we be of help. Please drop us a message and we will get back to you as soon as possible</p>
+              <p className='text-xs text-gray-700 font-light mb-3 mt-2'>How can we be of help. Please drop us a message and we will get back to you as soon as possible</p>
               <input
                 type="text"
                 placeholder="Name"
-                className="w-full p-2 mb-2 border text-xs rounded focus:outline-none focus:ring-0.5 focus:ring-orange-500 focus:border-orange-500"
+                className="w-full p-3 mb-2 border text-xs rounded focus:outline-none focus:ring-0.5 focus:ring-orange-500 focus:border-orange-500"
               />
               <input
                 type="tel"
-                placeholder="+254 Phone Number"
-                className="w-full p-2 mb-2 text-xs border rounded focus:outline-none focus:ring-0.5 focus:ring-orange-500 focus:border-orange-500"
+                placeholder="Phone Number"
+                className="w-full p-3 mb-2 text-xs border rounded focus:outline-none focus:ring-0.5 focus:ring-orange-500 focus:border-orange-500"
               />
               <textarea
                 placeholder="Message"
-                className="w-full p-2 mb-2 border text-xs rounded focus:outline-none focus:ring-0.5 focus:ring-orange-500 focus:border-orange-500"
+                className="w-full p-4 mb-2 border text-xs rounded focus:outline-none focus:ring-0.5 focus:ring-orange-500 focus:border-orange-500"
                 rows={5}
               />
               <button className="w-full bg-orange-600 text-xs text-white py-4 rounded">
@@ -174,8 +174,8 @@ const Navbar = () => {
 
   {/* Sign Up/Login Text (Visible on Large Screens) */}
   <Link href='/Authentication'>   
-  <span className="hidden lg:inline text-gray-700 text-xs font-semibold hover:text-orange-600 hover:underline">
-    Sign Up/Login
+  <span className="hidden lg:inline text-gray-700 text-xs font-semibold  hover:text-orange-600 hover:underline">
+    Sign Up / Log In
   </span>
   </Link>
 

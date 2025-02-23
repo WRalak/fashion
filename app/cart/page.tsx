@@ -1,16 +1,12 @@
 
+"use client";
 
-'use client';
-
-
-
-'use client';
-import React from 'react';
-import { useCart } from '../context/CartContext';
-import Image from 'next/image';
-import { FaTrashAlt } from 'react-icons/fa'; // Trash icon for delete
-import { useRouter } from 'next/navigation';
-import { StaticImport } from 'next/dist/shared/lib/get-img-props';
+import React from "react";
+import { useCart } from "../context/CartContext";
+import Image from "next/image";
+import { FaTrashAlt } from "react-icons/fa"; // Trash icon for delete
+import { useRouter } from "next/navigation";
+import { StaticImport } from "next/dist/shared/lib/get-img-props";
 
 // Define types for CartItem
 interface CartItem {
@@ -38,73 +34,92 @@ const CartPage: React.FC = () => {
   };
 
   // Calculate the total price of the items in the cart
-  const totalPrice = cart.reduce((total: number, product: { price: number; quantity: number; }) => total + product.price * product.quantity, 0);
+  const totalPrice = cart.reduce(
+    (total: number, product: { price: number; quantity: number }) =>
+      total + product.price * product.quantity,
+    0
+  );
 
   return (
-    <div className="my-4 px-2">
-      <h2 className="text-2xl font-semibold mb-4">Your Cart</h2>
+    <div className="my-4 px-4 flex flex-col items-center text-center">
+      <h2 className="text-xl font-semibold mb-4">Your Cart</h2>
 
       {cart.length === 0 ? (
         <p>Your cart is empty.</p>
       ) : (
-        <div className="space-y-3">
+        <div className="w-full max-w-2xl space-y-3">
           {cart.map((product: CartItem) => (
-            <div key={product.id} className="flex items-center bg-white p-3 shadow-sm rounded-lg">
-              {/* Product Image */}
-              <Image src={product.image} alt={product.name} height={80} width={80} className="w-20 h-20 object-cover" />
+            <div
+              key={product.id}
+              className="flex items-center bg-white p-4 shadow-md rounded-lg"
+            >
+              {/* Product Image (Left) */}
+              <Image
+                src={product.image}
+                alt={product.name}
+                height={100}
+                width={100}
+                className="w-24 h-24 object-cover rounded-md"
+              />
 
-              {/* Product Details */}
-              <div className="ml-3 flex-grow">
-                <h3 className="text-lg font-semibold">{product.name}</h3>
-                <p className="text-md text-gray-700">KES{product.price}</p>
+              {/* Product Details (Right) */}
+              <div className="ml-4 flex flex-col items-start text-left flex-grow">
+                <h3 className="text-sm font-semibold">{product.name}</h3>
+                <p className="text-xs text-gray-700">KES {product.price}</p>
                 <p className="text-xs text-gray-600">{product.description}</p>
 
-                {/* Quantity and Update Controls */}
-                <div className="flex items-center mt-1">
+                {/* Quantity Controls & Remove Button */}
+                <div className="flex items-center mt-2 space-x-3">
                   <button
-                    onClick={() => handleQuantityChange(product.id, product.quantity - 1)}
-                    className="px-1 py-1 bg-gray-200 rounded-md text-lg"
+                    onClick={() =>
+                      handleQuantityChange(product.id, product.quantity - 1)
+                    }
+                    className="px-3 py-1 bg-gray-200 rounded-full text-sm"
                   >
                     -
                   </button>
                   <input
                     type="number"
                     value={product.quantity}
-                    onChange={(e) => handleQuantityChange(product.id, parseInt(e.target.value))}
-                    className="mx-1 w-14 text-center border rounded-md"
+                    onChange={(e) =>
+                      handleQuantityChange(product.id, parseInt(e.target.value))
+                    }
+                    className="w-14 text-center text-xs border rounded-md"
                     min="1"
                   />
                   <button
-                    onClick={() => handleQuantityChange(product.id, product.quantity + 1)}
-                    className="px-1 py-1 bg-gray-200 rounded-md text-lg"
+                    onClick={() =>
+                      handleQuantityChange(product.id, product.quantity + 1)
+                    }
+                    className="px-3 py-1 bg-gray-200 rounded-full text-sm"
                   >
                     +
                   </button>
+
+                  {/* Remove Button */}
+                  <button
+                    onClick={() => handleRemove(product.id)}
+                    className="text-red-500"
+                  >
+                    <FaTrashAlt size={12} />
+                  </button>
                 </div>
               </div>
-
-              {/* Remove Button */}
-              <button onClick={() => handleRemove(product.id)} className="text-red-500 ">
-                <FaTrashAlt size={12} />
-              </button>
             </div>
           ))}
 
           {/* Total Price */}
-          <div className="mt-4 flex justify text-lg font-semibold">
-            <span>Total:</span>
-            <span>${totalPrice.toFixed(2)}</span> {/* Formatting to two decimal places */}
+          <div className="mt-4 text-xs font-semibold">
+            <span>Total: KES {totalPrice.toFixed(2)}</span>
           </div>
 
           {/* Checkout Button */}
-          <div className="mt-4">
-            <button
-              onClick={() => router.push('/Checkout')}
-              className="rounded-sm p-2 bg-orange-500 text-white"
-            >
-              Proceed to Checkout
-            </button>
-          </div>
+          <button
+            onClick={() => router.push("/Checkout")}
+            className="mt-4 px-6 py-2 bg-orange-500 text-white text-sm rounded"
+          >
+            Proceed to Checkout
+          </button>
         </div>
       )}
     </div>
@@ -112,12 +127,4 @@ const CartPage: React.FC = () => {
 };
 
 export default CartPage;
-
-
-
-
-
-
-
-
 

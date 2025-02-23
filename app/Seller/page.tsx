@@ -2,8 +2,11 @@
 
 "use client";
 
+import Link from "next/link";
 import { useState } from "react";
-import { FaTimes, FaStore, FaMapMarkerAlt } from "react-icons/fa";
+import { CiShop } from "react-icons/ci";
+import { FaTimes } from "react-icons/fa";
+import { GoLocation } from "react-icons/go";
 import { RiTShirtLine } from "react-icons/ri";
 
 interface SellerForm {
@@ -48,6 +51,7 @@ const BecomeASeller = () => {
       } else {
         setMessage(result.message || "Submission failed.");
       }
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     } catch (error) {
       setMessage("Something went wrong. Try again.");
     } finally {
@@ -61,62 +65,65 @@ const BecomeASeller = () => {
         <button className="absolute top-4 right-4 text-gray-500" onClick={() => setIsOpen(false)}>
           <FaTimes size={13} />
         </button>
-
+       
         <p className="text-sm font-semibold mb-2">Become A Seller</p>
         <hr className="mb-4" />
-
-        <p className="text-xs text-gray-600 mb-4">
-          Add your store details and the items you wish to sell, and we will contact you.
+        <h6 className="text-xs mb-2  text-black">Becoming A Seller: Join the Waiting List</h6>
+        <p className="text-[11px] text-gray-600 mb-4">
+        To sell on Solgates, add your store details and the items you <br />wish to sell and we will pick them from you. You can also deliver <br /> your items to us.
         </p>
 
         <form onSubmit={handleSubmit}>
           <div className="flex items-center border border-gray-300 p-2 rounded mb-3">
-            <FaStore className="text-blue-500 mr-2" />
+            <CiShop className="text-blue-500 mr-2 " />
             <input
               type="text"
               name="storeName"
               value={formData.storeName}
               onChange={handleChange}
               placeholder="Enter the name of your store"
-              className="w-full outline-none text-xs"
+              className="w-full outline-none text-xs py-2"
               required
             />
           </div>
 
           <div className="flex items-center border border-gray-300 p-2 rounded mb-3">
-            <FaMapMarkerAlt className="text-green-500 mr-2" />
+            <GoLocation className="text-green-500 mr-2" />
             <input
               type="text"
               name="location"
               value={formData.location}
               onChange={handleChange}
               placeholder="Add your Physical location"
-              className="w-full outline-none text-xs"
+              className="w-full outline-none text-xs py-2"
               required
             />
           </div>
-
           <div className="flex items-center border border-gray-300 p-2 rounded mb-3">
-            <RiTShirtLine className="text-blue-600 mr-2" />
-            <select
-              name="category"
-              value={formData.category}
-              onChange={handleChange}
-              className="w-full outline-none text-xs cursor-pointer"
-              required
-            >
-              <option value="">Select the category of products you sell</option>
-              <option value="Shoes">Shoes</option>
-              <option value="Accessories">Accessories</option>
-              <option value="Clothing">Clothing</option>
-            </select>
-          </div>
+  <RiTShirtLine className="text-blue-600 mr-2" />
+  <select
+    name="category"
+    value={formData.category}
+    onChange={handleChange}
+    className="w-full outline-none text-xs cursor-pointer py-3 text-gray-400 focus:text-gray-800 appearance-none"
+    required
+  >
+    <option value="" className="text-gray-400">Select the category of products you sell</option>
+    <option value="Shoes" className="text-gray-800">Shoes</option>
+    <option value="Accessories" className="text-gray-800">Accessories</option>
+    <option value="Clothing" className="text-gray-800">Clothing</option>
+  </select>
+</div>
+
+
+
 
           <div className="flex items-center mb-4">
             <input type="checkbox" required className="mr-2 accent-orange-500 text-white" />
             <p className="text-xs text-gray-600">
               By creating a shop, you agree to the {" "}
-              <span className="text-gray-700 font-semibold cursor-pointer">Terms & Conditions</span>
+              <Link href={'Terms'}>  
+              <span className="text-gray-700 font-semibold cursor-pointer">Terms & Conditions</span></Link>
             </p>
           </div>
 

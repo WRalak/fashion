@@ -1,5 +1,3 @@
-
-
 "use client";
 
 import { useWishlist } from "../context/WishlistContext";
@@ -34,8 +32,8 @@ const Wishlist = () => {
               <Image
                 src={product.image}
                 alt={product.name}
-                height={100}
-                width={100}
+                height={80}
+                width={80}
                 className="w-full h-48 object-cover "
               />
 
@@ -51,6 +49,8 @@ const Wishlist = () => {
 };
 
 export default Wishlist;
+
+
 
 
 
