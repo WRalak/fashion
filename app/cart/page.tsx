@@ -51,7 +51,7 @@ const CartPage: React.FC = () => {
           {cart.map((product: CartItem) => (
             <div
               key={product.id}
-              className="flex items-center bg-white p-4 shadow-md rounded-lg"
+              className="flex items-center bg-white p-4 shadow"
             >
               {/* Product Image (Left) */}
               <Image
@@ -99,7 +99,7 @@ const CartPage: React.FC = () => {
                   {/* Remove Button */}
                   <button
                     onClick={() => handleRemove(product.id)}
-                    className="text-red-500"
+                    className="text-red-800"
                   >
                     <FaTrashAlt size={12} />
                   </button>
@@ -116,9 +116,9 @@ const CartPage: React.FC = () => {
           {/* Checkout Button */}
           <button
             onClick={() => router.push("/Checkout")}
-            className="mt-4 px-6 py-2 bg-orange-500 text-white text-sm rounded"
+            className="mt-4 px-8 py-4 bg-orange-600 text-white text-sm rounded"
           >
-            Proceed to Checkout
+             Checkout
           </button>
         </div>
       )}

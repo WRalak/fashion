@@ -1,9 +1,11 @@
 'use client';
 
+import { StaticImport } from 'next/dist/shared/lib/get-img-props';
 import React, { createContext, useContext, useState, ReactNode } from 'react';
 
 // Define CartItem type
 interface CartItem {
+  imageUrl: string | StaticImport;
   id: number;
   name: string;
   price: number;
@@ -33,7 +35,16 @@ export const CartProvider: React.FC<CartProviderProps> = ({ children }) => {
   const [cart, setCart] = useState<CartItem[]>([]);
 
   const addToCart = (product: CartItem) => {
-    setCart((prev) => [...prev, { ...product, quantity: 1 }]);
+    setCart((prev) => {
+      // Check if the product is already in the cart
+      const existingProduct = prev.find((item) => item.id === product.id);
+      
+      if (existingProduct) {
+        return prev; // If product exists, return the same cart (prevent duplicate)
+      }
+
+      return [...prev, { ...product, quantity: 1 }];
+    });
   };
 
   const removeFromCart = (id: number) => {
@@ -64,6 +75,7 @@ export const useCart = (): CartContextType => {
   }
   return context;
 };
+
 
 
 

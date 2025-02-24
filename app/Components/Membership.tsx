@@ -1,5 +1,3 @@
-
-
 "use client";
 
 import { useState, useEffect } from "react";
@@ -27,11 +25,11 @@ const ShopByGender = () => {
   }, []);
 
   const nextSlide = () => {
-    setIndex((prevIndex) => (prevIndex + 1) % images.length);
+    setIndex((prev) => (prev + 1) % images.length);
   };
 
   const prevSlide = () => {
-    setIndex((prevIndex - 1 + images.length) % images.length);
+    setIndex((prev) => (prev - 1 + images.length) % images.length);
   };
 
   const getDisplayedImages = () => {
@@ -87,13 +85,3 @@ const ShopByGender = () => {
 };
 
 export default ShopByGender;
-
-
-
-
-
-
-
-
-
-

@@ -5,26 +5,34 @@
 import React, { useState } from "react";
 import { useCart } from "../context/CartContext";
 import { useRouter } from "next/navigation";
+import Image from "next/image";
+import { FaRegBuilding } from "react-icons/fa";
+import { CiLocationOn } from "react-icons/ci";
+import { IoPersonOutline } from "react-icons/io5";
+import { MdDelete } from "react-icons/md"; // Delete icon
 
-const CheckoutPage = () => {
-  const { cart } = useCart();
+const counties = ["Nairobi", "Mombasa", "Kisumu", "Nakuru", "Eldoret"];
+
+const CheckoutPage: React.FC = () => {
+  const { cart, removeFromCart } = useCart();
   const router = useRouter();
 
-  // State to handle user details
   const [userDetails, setUserDetails] = useState({
     name: "",
     email: "",
     address: "",
   });
 
-  // Calculate the total price of the items in the cart
+  const [selectedCounty, setSelectedCounty] = useState("");
+  const [selectedCountry, setSelectedCountry] = useState("+254");
+  const [setDefault, setSetDefault] = useState(false);
+
   const totalPrice = cart.reduce(
     (total: number, product: { price: number; quantity: number }) =>
       total + product.price * product.quantity,
     0
   );
 
-  // Handle input changes for user details
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     setUserDetails((prev) => ({
@@ -33,111 +41,157 @@ const CheckoutPage = () => {
     }));
   };
 
-  // Handle form submission (for example, create an order)
   const handleCheckout = (e: React.FormEvent) => {
     e.preventDefault();
-
-    // Here, you can handle the checkout process, like sending the order details to your backend
+    if (cart.length === 0) return; // Prevent checkout when cart is empty
     console.log("Order submitted:", userDetails, cart);
-
-    // Redirect or show confirmation after submission
     router.push("/orderConfirmation");
   };
 
   return (
     <div className="flex flex-col items-center my-8 px-4 text-center">
-      <h2 className="text-2xl font-semibold mb-6">Checkout</h2>
+      {/* Hero Image */}
+      <div className="w-full flex flex-col items-center">
+  <div className="w-[885px] sm:w-[90%] md:w-[80%] lg:w-[70%] xl:w-[885px]">
+    <Image
+      src="/hero1.jpg"
+      alt="Hero"
+      width={885}
+      height={250}
+      className="w-full object-cover rounded-lg h-[250px] sm:w-[90%] md:w-[80%] lg:w-[70%] xl:w-[885px] mx-auto "
+    />
+    <p className="text-xs mt-3 text-left">Personal Details <span className="text-gray-500">| Shipping Details | Payment Details</span></p>
+  </div>
+</div>
 
-      {/* Order Summary */}
-      <div className="w-full max-w-lg bg-white p-6 shadow-md rounded-lg text-center">
-        <h3 className="text-xl font-semibold mb-4">Order Summary</h3>
 
-        {cart.length === 0 ? (
-          <p>Your cart is empty.</p>
-        ) : (
-          <div className="space-y-4">
-            {cart.map((product) => (
-              <div
-                key={product.id}
-                className="flex justify-between items-center bg-gray-100 p-4 rounded-lg"
-              >
-                <h3 className="text-sm font-semibold">{product.name}</h3>
-                <p className="text-sm text-gray-700">
-                  KES {product.price} × {product.quantity}
-                </p>
+
+      {/* Flex container for Order Summary and Shipping Form */}
+      <div className="flex flex-col mt-3 lg:flex-row lg:justify-center lg:gap-10 w-full max-w-5xl">
+        {/* Order Summary */}
+        <div className="w-full lg:w-1/2 bg-white p-6 shadow-md rounded-lg text-center">
+          <h3 className="text-xl font-semibold mb-4">Order Summary</h3>
+
+          {cart.length === 0 ? (
+            <p>Your cart is empty.</p>
+          ) : (
+            <div className="space-y-4">
+              {cart.map((product) => (
+                <div
+                  key={product.id}
+                  className="flex items-center justify-between bg-gray-100 p-4 rounded-lg"
+                >
+                  <Image
+                    src={product.image}
+                    alt={product.name}
+                    height={50}
+                    width={50}
+                    className="w-12 h-12 object-cover rounded-md"
+                  />
+                  <div className="text-left flex-grow ml-3">
+                    <h3 className="text-sm font-semibold">{product.name}</h3>
+                    <p className="text-sm text-gray-700">
+                      KES {product.price} × {product.quantity}
+                    </p>
+                  </div>
+                  {/* Delete Button */}
+                  <button onClick={() => removeFromCart(product.id)}>
+                    <MdDelete className="text-red-500 text-xl" />
+                  </button>
+                </div>
+              ))}
+
+              {/* Total Price */}
+              <div className="mt-6 text-lg font-semibold">
+                <span>Total: KES {totalPrice.toFixed(2)}</span>
               </div>
-            ))}
-
-            {/* Total Price */}
-            <div className="mt-6 text-lg font-semibold">
-              <span>Total: KES {totalPrice.toFixed(2)}</span>
             </div>
-          </div>
-        )}
-      </div>
+          )}
+        </div>
 
-      {/* User Details Form */}
-      <div className="w-full max-w-lg bg-white p-6 shadow-md rounded-lg mt-6">
-        <h3 className="text-lg font-semibold mb-4">Shipping Details</h3>
-        <form onSubmit={handleCheckout} className="space-y-4 text-left">
-          <div className="flex flex-col">
-            <label htmlFor="name" className="text-sm font-medium">
-              Full Name
-            </label>
-            <input
-              type="text"
-              id="name"
-              name="name"
-              value={userDetails.name}
-              onChange={handleInputChange}
-              required
-              className="p-2 border rounded focus:outline-none focus:ring-[0.5px] focus:ring-orange-600"
-            />
-          </div>
+        {/* Shipping Details Form */}
+        <div className="w-full lg:w-1/2 bg-white p-6 shadow-md rounded-lg mt-6 lg:mt-0">
+          <h3 className="text-lg font-semibold mb-4">Shipping Details</h3>
+          <form onSubmit={handleCheckout} className="space-y-4 text-left">
+            {/* Name */}
+            <div className="flex items-center border rounded p-2 focus-within:ring-[0.5px] focus-within:ring-orange-600 w-full">
+              <IoPersonOutline className="mr-2 text-green-500" />
+              <input
+                type="text"
+                name="name"
+                value={userDetails.name}
+                onChange={handleInputChange}
+                required
+                placeholder="Name"
+                className="w-full focus:outline-none text-xs"
+              />
+            </div>
 
-          <div className="flex flex-col">
-            <label htmlFor="email" className="text-sm font-medium">
-              Email
-            </label>
-            <input
-              type="email"
-              id="email"
-              name="email"
-              value={userDetails.email}
-              onChange={handleInputChange}
-              required
-              className="p-2 border rounded-md focus:outline-none focus:ring-[0.5px] focus:ring-orange-600"
-            />
-          </div>
+            {/* Apartment/Office */}
+            <div className="flex items-center border rounded p-2 focus-within:ring-[0.5px] focus-within:ring-orange-600 w-full">
+              <FaRegBuilding className="mr-2 text-blue-500" />
+              <input type="text" placeholder="Apartment/Office" className="w-full focus:outline-none text-xs" />
+            </div>
 
-          <div className="flex flex-col">
-            <label htmlFor="address" className="text-sm font-medium">
-              Address
-            </label>
-            <textarea
-              id="address"
-              name="address"
-              value={userDetails.address}
-              onChange={handleInputChange}
-              required
-              className="p-2 border rounded focus:outline-none focus:ring-[0.5px] focus:ring-orange-600"
-            />
-          </div>
+            {/* County Selection */}
+            <div className="relative w-full">
+              <CiLocationOn className="absolute left-3 top-1/2 transform -translate-y-1/2 text-red-500" />
+              <select
+                value={selectedCounty}
+                onChange={(e) => setSelectedCounty(e.target.value)}
+                className="w-full pl-10 p-2 border text-xs rounded focus:outline-none focus:ring-[0.5px] focus:ring-orange-600"
+              >
+                <option value="">Select County</option>
+                {counties.map((county, index) => (
+                  <option key={index} value={county}>
+                    {county}
+                  </option>
+                ))}
+              </select>
+            </div>
 
-          {/* Checkout Button */}
-          <div className="mt-4 text-center">
-            <button
-              type="submit"
-              className="px-6 py-3 bg-orange-500 text-white rounded text-sm"
-            >
-              Complete Order
-            </button>
-          </div>
-        </form>
+            {/* Phone Number */}
+            <div className="flex border p-2 rounded focus-within:ring-[0.5px] focus-within:ring-orange-600">
+              <select
+                value={selectedCountry}
+                onChange={(e) => setSelectedCountry(e.target.value)}
+                className="focus:outline-none border-r pr-2 mr-2 text-xs"
+              >
+                <option value="+254">+254</option>
+                <option value="+255">+255</option>
+                <option value="+256">+256</option>
+              </select>
+              <input type="tel" placeholder="Enter phone number" className="w-full text-xs focus:outline-none" />
+            </div>
+
+            {/* Set as Default Checkbox */}
+            <div className="flex items-center">
+              <input
+                type="checkbox"
+                checked={setDefault}
+                onChange={() => setSetDefault(!setDefault)}
+                className="mr-2"
+              />
+              <label className="text-xs text-slate-700 font-light">Set as Default Address?</label>
+            </div>
+
+            {/* Save and Continue Button */}
+            <div className="mt-4 text-center">
+              <button
+                type="submit"
+                className={`px-6 py-3 w-full rounded text-sm ${
+                  cart.length === 0 ? "bg-gray-400 cursor-not-allowed" : "bg-orange-600 text-white"
+                }`}
+                disabled={cart.length === 0}
+              >
+                Save and Continue
+              </button>
+            </div>
+          </form>
+        </div>
       </div>
     </div>
   );
 };
 
 export default CheckoutPage;
-

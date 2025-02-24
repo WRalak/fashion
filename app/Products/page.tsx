@@ -5,12 +5,17 @@ const page = () => {
   return (
     <div className='flex'>
       <Sidebar/>
-      product
+      <div>
+        <h2>product</h2>
+      </div>
+      
     </div>
   )
 }
 
 export default page
+
+
 
 
 

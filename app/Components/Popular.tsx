@@ -7,7 +7,6 @@ import { useCart } from '../context/CartContext';
 import { useWishlist } from '../context/WishlistContext';
 import Image from 'next/image';
 import { CiHeart } from "react-icons/ci";
-import { useRouter } from 'next/navigation';
 import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
 
 // Define Product type
@@ -19,22 +18,24 @@ type Product = {
   description: string;
 };
 
+// Define CartItem type
+type CartItem = Product & { quantity: number };
+
 // Sample Products
 const products: Product[] = [
-  { id: 1, name: 'Product 1', price: 1000, image: '/mumbi.jpg', description: 'Description of Product 1' },
-  { id: 2, name: 'Product 2', price: 2000, image: '/Rectangle 42.jpg', description: 'Description of Product 2' },
-  { id: 3, name: 'Product 3', price: 1500, image: '/Rectangle 56.png', description: 'Description of Product 3' },
-  { id: 4, name: 'Product 4', price: 2500, image: '/Rectangle 300.jpg', description: 'Description of Product 4' },
-  { id: 5, name: 'Product 5', price: 1200, image: '/Rectangle 303.jpg', description: 'Description of Product 5' },
-  { id: 6, name: 'Product 6', price: 2220, image: '/eyes.webp', description: 'Description of Product 6' },
-  { id: 7, name: 'Product 7', price: 1890, image: '/eyes1.webp', description: 'Description of Product 7' },
-  { id: 8, name: 'Product 8', price: 3030, image: '/eyes2.webp', description: 'Description of Product 8' },
+  { id: 1, name: 'Product 1', price: 1000, image: '/mumbi.jpg', description: 'Mumbi' },
+  { id: 2, name: 'Product 2', price: 2000, image: '/shoe.png', description: 'Solgates' },
+  { id: 3, name: 'Product 3', price: 1500, image: '/Rectangle 56.png', description: 'One Stop Shop' },
+  { id: 4, name: 'Product 4', price: 2500, image: '/Rectangle 300.jpg', description: 'Chillums' },
+  { id: 5, name: 'Product 5', price: 1200, image: '/Rectangle 303.jpg', description: 'Vs Code' },
+  { id: 6, name: 'Product 6', price: 2220, image: '/eyes.webp', description: 'S|Sunny' },
+  { id: 7, name: 'Product 7', price: 1890, image: '/eyes1.webp', description: 'S|Sunny' },
+  { id: 8, name: 'Product 8', price: 3030, image: '/eyes2.webp', description: 'S|Sunny' },
 ];
 
 const MostPopular = () => {
   const { addToCart } = useCart();
   const { addToWishlist } = useWishlist();
-  const router = useRouter();
   const [currentIndex, setCurrentIndex] = useState(0);
 
   const handleNext = () => {
@@ -51,9 +52,9 @@ const MostPopular = () => {
 
   const displayedProducts = products.slice(currentIndex, currentIndex + 4);
 
-  const handleImageClick = (product: Product) => {
-    addToCart(product);
-    router.push('/cart');
+  const handleAddToCart = (product: Product) => {
+    const cartItem: CartItem = { ...product, quantity: 1 };
+    addToCart(cartItem); // Only adds to cart, no navigation
   };
 
   return (
@@ -85,22 +86,20 @@ const MostPopular = () => {
 
             {/* Product Image */}
             <Image
-  src={product.image}
-  alt={product.name}
-  className="w-full aspect-[3/4] object-cover cursor-pointer rounded"
-  width={885} 
-  height={700}  // Increased height
-  onClick={() => handleImageClick(product)}
-/>
-
-
-
+              src={product.image}
+              alt={product.name}
+              className="w-full aspect-[3/4] object-cover cursor-pointer rounded"
+              width={885} 
+              height={700}
+              onClick={() => handleAddToCart(product)}
+            />
 
             {/* Product Info */}
             <div className="p-2">
               <h5 className="text-xs">{product.name}</h5>
-              <p className="text-xs text-blue-700">KES {product.price}</p>
-              <p className="text-xs text-gray-600 mt-1">{product.description}</p>
+             
+              <p className="text-xs text-blue-600 mt-1">{product.description}</p>
+              <p className="text-xs font-semibold mt-2 text-gray-950">KES {product.price}</p>
             </div>
           </div>
         ))}
@@ -110,3 +109,5 @@ const MostPopular = () => {
 };
 
 export default MostPopular;
+
+

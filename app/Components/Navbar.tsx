@@ -36,91 +36,95 @@ const Navbar = () => {
   return (
     <nav className="bg-white space-x-4  w-full max-w-screen-lg mx-auto " >
       {/* Top Section */}
-      <div className=' bg-slate-100 py-2   max-w-screen-lg mx-auto flex justify-end space-x-4 lg:mr-20' >
-     <div className='items-center flex text-gray-500'> <BsTelephone  className='text-xs mr-2'/>
+      <div className="w-full bg-slate-100">
+  <div className="max-w-screen-lg mx-auto p-2">
+    <div className="flex justify-end space-x-4 lg:mr-20">
+      {/* Phone Number */}
+      <div className="items-center flex text-gray-500">
+        <BsTelephone className="text-xs mr-2" />
+        <p className="text-[10px]">+254718600199</p>
+      </div>
+      <span className="text-xs text-slate-400">|</span>
 
-<p className='text-[10px] mr-'>+254718600199</p></div>
-<span className='text-xs text-slate-400'>|</span>
-        {/* Help Icon */}
-        <div className="relative">
-          <button
-            onClick={() => setIsHelpOpen(!isHelpOpen)}
-            className="flex items-center space-x-1"
-          >
-            <IoMdHelpCircleOutline className="h-3 w-3 text-gray-500" />
-            <span className="text-[10px] text-gray-500">Help</span>
-            <span className='text-xs text-slate-400'>|</span>
-          </button>
-          {isHelpOpen && (
-            <div className="absolute right-0 mt-2 w-[380px] h-[400px] z-50  bg-white border border-gray-200 rounded-lg p-6">
-              <div className="flex justify-between items-center mb-4">
-                <h3 className="font-semibold text-sm">Help</h3>
-                <button onClick={() => setIsHelpOpen(false)}>
-                  <BsXLg className="h-3 w-3 text-black" />
-                </button>
-                
-              </div>
-              <hr  className='text-gray-400'/>
-              <p className='text-xs text-gray-700 font-light mb-3 mt-2'>How can we be of help. Please drop us a message and we will get back to you as soon as possible</p>
-              <input
-                type="text"
-                placeholder="Name"
-                className="w-full p-3 mb-2 border text-xs rounded focus:outline-none focus:ring-0.5 focus:ring-orange-500 focus:border-orange-500"
-              />
-              <input
-                type="tel"
-                placeholder="Phone Number"
-                className="w-full p-3 mb-2 text-xs border rounded focus:outline-none focus:ring-0.5 focus:ring-orange-500 focus:border-orange-500"
-              />
-              <textarea
-                placeholder="Message"
-                className="w-full p-4 mb-2 border text-xs rounded focus:outline-none focus:ring-0.5 focus:ring-orange-500 focus:border-orange-500"
-                rows={5}
-              />
-              <button className="w-full bg-orange-600 text-xs text-white py-4 rounded">
-                Send
+      {/* Help Icon */}
+      <div className="relative">
+        <button
+          onClick={() => setIsHelpOpen(!isHelpOpen)}
+          className="flex items-center space-x-1"
+        >
+          <IoMdHelpCircleOutline className="h-3 w-3 text-gray-500" />
+          <span className="text-[10px] text-gray-500">Help</span>
+          <span className="text-xs text-slate-400">|</span>
+        </button>
+        {isHelpOpen && (
+          <div className="absolute right-0 mt-2 w-[380px] h-[400px] z-50 bg-white border border-gray-200 rounded-lg p-6">
+            <div className="flex justify-between items-center mb-4">
+              <h3 className="font-semibold text-sm">Help</h3>
+              <button onClick={() => setIsHelpOpen(false)}>
+                <BsXLg className="h-3 w-3 text-black" />
               </button>
             </div>
-          )}
-        </div>
-
-        {/* Open Shop Icon */}
-        <div className="relative ">
-          <button
-            onClick={() => setIsShopOpen(!isShopOpen)}
-            className="flex items-center space-x-1"
-          >
-            <RiStore2Fill className="h-4 w-4 text-orange-500 " />
-            <span className="text-[10px] text-orange-500">Open Shop</span>
-          </button>
-          {isShopOpen && (
-            <div className="absolute right-0 mt-2 w-[380px] h-[207px] bg-white z-50 border border-gray-200 rounded-lg shadow-lg p-4">
-              <div className="flex justify-center">
-                <AiTwotoneAlert className="h-6 rounded w-6 text-orange-500 mt-4 bg-orange-100" />
-              </div>
-              <h5 className="text-center mt-2 text-sm font-bold"> Create Shop</h5>
-              <p className="text-center mt-2 font-thin text-xs">
-              You will need to have an account before setting up a shop
-              </p>
-              < div className="flex justify-between mt-6 ">
-              
-  <button
-    onClick={() => setIsShopOpen(false)}
-    className="px-14 py-4 text-xs font-medium text-orange-500 border border-orange-500 rounded"
-  >
-    Cancel
-  </button>
-  <button 
-    className="px-12 py-4 text-xs font-medium text-white bg-orange-600 rounded"
-  >
-     <Link  href={'/Seller'}>Create Account </Link>
-  </button>
-
-              </div>
-            </div>
-          )}
-        </div>
+            <hr className="text-gray-400" />
+            <p className="text-xs text-gray-700 font-light mb-3 mt-2">
+              How can we be of help? Please drop us a message, and we will get back to you as soon as possible.
+            </p>
+            <input
+              type="text"
+              placeholder="Name"
+              className="w-full p-3 mb-2 border text-xs rounded focus:outline-none focus:ring-0.5 focus:ring-orange-500 focus:border-orange-500"
+            />
+            <input
+              type="tel"
+              placeholder="Phone Number"
+              className="w-full p-3 mb-2 text-xs border rounded focus:outline-none focus:ring-0.5 focus:ring-orange-500 focus:border-orange-500"
+            />
+            <textarea
+              placeholder="Message"
+              className="w-full p-4 mb-2 border text-xs rounded focus:outline-none focus:ring-0.5 focus:ring-orange-500 focus:border-orange-500"
+              rows={5}
+            />
+            <button className="w-full bg-orange-600 text-xs text-white py-4 rounded">
+              Send
+            </button>
+          </div>
+        )}
       </div>
+
+      {/* Open Shop Icon */}
+      <div className="relative">
+        <button
+          onClick={() => setIsShopOpen(!isShopOpen)}
+          className="flex items-center space-x-1"
+        >
+          <RiStore2Fill className="h-4 w-4 text-orange-500" />
+          <span className="text-[10px] text-orange-500">Open Shop</span>
+        </button>
+        {isShopOpen && (
+          <div className="absolute right-0 mt-2 w-[380px] h-[207px] bg-white z-50 border border-gray-200 rounded-lg shadow-lg p-4">
+            <div className="flex justify-center">
+              <AiTwotoneAlert className="h-6 rounded w-6 text-orange-500 mt-4 bg-orange-100" />
+            </div>
+            <h5 className="text-center mt-2 text-sm font-bold">Create Shop</h5>
+            <p className="text-center mt-2 font-thin text-xs">
+              You will need to have an account before setting up a shop.
+            </p>
+            <div className="flex justify-between mt-6">
+              <button
+                onClick={() => setIsShopOpen(false)}
+                className="px-14 py-4 text-xs font-medium text-orange-500 border border-orange-500 rounded"
+              >
+                Cancel
+              </button>
+              <button className="px-12 py-4 text-xs font-medium text-white bg-orange-600 rounded">
+                <Link href="/Seller">Create Account</Link>
+              </button>
+            </div>
+          </div>
+        )}
+      </div>
+    </div>
+  </div>
+</div>
 
       {/* Main Navbar */}
       <div className="container mx-auto px-4  py-4 flex items-center   justify-between w-full max-w-screen-lg ">
@@ -194,13 +198,14 @@ const Navbar = () => {
 
           {/* Cart Icon */}
           <Link href="/cart" className="relative">
-            <IoBagOutline className="text-xl " />
-            {cart?.length > 0 && (
-              <span className="absolute -top-2 -right-2 bg-green-500 text-white text-xs font-bold px-2 py-1 rounded-full">
-                {cart.length}
-              </span>
-            )}
-          </Link>
+  <IoBagOutline className="text-xl" />
+  {cart?.length > 0 && (
+    <span className="absolute -top-2 -right-2 bg-green-500 text-white text-xs px-2 py-1 rounded-full animate-blink">
+      {cart.length}
+    </span>
+  )}
+</Link>
+
             {/* Search Icon */}
             <button onClick={() => setIsSearchOpen(!isSearchOpen)}>
             <BiSearch className="h-4 w-4 text-gray-700" />

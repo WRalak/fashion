@@ -17,15 +17,6 @@ export default function Home() {
   height={250}
   className="w-[885px] h-[250px] sm:w-[90%] md:w-[80%] lg:w-[70%] xl:w-[885px] mx-auto object-cover rounded-lg"
 />
-
-
-
-
-
-
-
-
-
       <Shop />
       <PopularProducts />
       <Membership />
