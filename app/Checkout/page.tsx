@@ -9,7 +9,10 @@ import Image from "next/image";
 import { FaRegBuilding } from "react-icons/fa";
 import { CiLocationOn } from "react-icons/ci";
 import { IoPersonOutline } from "react-icons/io5";
-import { MdDelete } from "react-icons/md"; // Delete icon
+
+import { RiDeleteBin5Line } from "react-icons/ri";
+import UserProfile from "../Components/UserProfile";
+import Payments from "../Components/Payments";
 
 const counties = ["Nairobi", "Mombasa", "Kisumu", "Nakuru", "Eldoret"];
 
@@ -70,7 +73,7 @@ const CheckoutPage: React.FC = () => {
       <div className="flex flex-col mt-3 lg:flex-row lg:justify-center lg:gap-10 w-full max-w-5xl">
         {/* Order Summary */}
         <div className="w-full lg:w-1/2 bg-white p-6 shadow-md rounded-lg text-center">
-          <h3 className="text-xl font-semibold mb-4">Order Summary</h3>
+          <h3 className="text-sm font-semibold mb-4">Shopping Cart</h3>
 
           {cart.length === 0 ? (
             <p>Your cart is empty.</p>
@@ -96,7 +99,7 @@ const CheckoutPage: React.FC = () => {
                   </div>
                   {/* Delete Button */}
                   <button onClick={() => removeFromCart(product.id)}>
-                    <MdDelete className="text-red-500 text-xl" />
+                  <RiDeleteBin5Line className="text-red-500 text-sm" />
                   </button>
                 </div>
               ))}
@@ -111,7 +114,9 @@ const CheckoutPage: React.FC = () => {
 
         {/* Shipping Details Form */}
         <div className="w-full lg:w-1/2 bg-white p-6 shadow-md rounded-lg mt-6 lg:mt-0">
-          <h3 className="text-lg font-semibold mb-4">Shipping Details</h3>
+        <UserProfile/>
+        <h3 className="text-sm font-semibold mt-3">02</h3>
+          <h3 className="text-lg font-semibold ">Shipping Details</h3>
           <form onSubmit={handleCheckout} className="space-y-4 text-left">
             {/* Name */}
             <div className="flex items-center border rounded p-2 focus-within:ring-[0.5px] focus-within:ring-orange-600 w-full">
@@ -132,7 +137,10 @@ const CheckoutPage: React.FC = () => {
               <FaRegBuilding className="mr-2 text-blue-500" />
               <input type="text" placeholder="Apartment/Office" className="w-full focus:outline-none text-xs" />
             </div>
-
+            <div className="flex items-center border rounded p-2 focus-within:ring-[0.5px] focus-within:ring-orange-600 w-full">
+              <FaRegBuilding className="mr-2 text-blue-500" />
+              <input type="text" placeholder="Apartment/Office" className="w-full focus:outline-none text-xs" />
+            </div>
             {/* County Selection */}
             <div className="relative w-full">
               <CiLocationOn className="absolute left-3 top-1/2 transform -translate-y-1/2 text-red-500" />
@@ -177,15 +185,17 @@ const CheckoutPage: React.FC = () => {
 
             {/* Save and Continue Button */}
             <div className="mt-4 text-center">
-              <button
-                type="submit"
-                className={`px-6 py-3 w-full rounded text-sm ${
-                  cart.length === 0 ? "bg-gray-400 cursor-not-allowed" : "bg-orange-600 text-white"
-                }`}
-                disabled={cart.length === 0}
-              >
-                Save and Continue
-              </button>
+            <button
+  type="submit"
+  className={`px-6 py-3 w-full rounded text-xs transition ${
+    cart.length === 0 ? "bg-gray-400 cursor-not-allowed" : "bg-orange-600 text-white hover:bg-orange-700"
+  }`}
+  disabled={cart.length === 0}
+>
+  Save & Continue
+</button>
+
+                <Payments/>
             </div>
           </form>
         </div>

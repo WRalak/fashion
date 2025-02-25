@@ -1,6 +1,9 @@
-'use client'
 
-import React, { createContext, useContext, useState, ReactNode } from 'react';
+
+
+"use client";
+
+import React, { createContext, useContext, useState, ReactNode } from "react";
 
 // Define the type for a product in the wishlist
 type Product = {
@@ -18,7 +21,7 @@ interface WishlistContextType {
   removeFromWishlist: (productId: number) => void;
 }
 
-// Create the Wishlist context with a default value of undefined
+// Create the Wishlist context
 export const WishlistContext = createContext<WishlistContextType | undefined>(undefined);
 
 // Wishlist Provider component
@@ -29,9 +32,16 @@ interface WishlistProviderProps {
 export const WishlistProvider: React.FC<WishlistProviderProps> = ({ children }) => {
   const [wishlist, setWishlist] = useState<Product[]>([]);
 
-  // Add product to wishlist
+  // Add product to wishlist (prevent duplicates)
   const addToWishlist = (product: Product) => {
-    setWishlist((prevWishlist) => [...prevWishlist, product]);
+    setWishlist((prevWishlist) => {
+      // Check if the product is already in the wishlist
+      const isAlreadyInWishlist = prevWishlist.some((item) => item.id === product.id);
+      if (isAlreadyInWishlist) {
+        return prevWishlist; // Return the same list if already added
+      }
+      return [...prevWishlist, product]; // Add product if not in wishlist
+    });
   };
 
   // Remove product from wishlist
@@ -50,10 +60,7 @@ export const WishlistProvider: React.FC<WishlistProviderProps> = ({ children }) 
 export const useWishlist = (): WishlistContextType => {
   const context = useContext(WishlistContext);
   if (!context) {
-    throw new Error('useWishlist must be used within a WishlistProvider');
+    throw new Error("useWishlist must be used within a WishlistProvider");
   }
   return context;
 };
-
-
-
