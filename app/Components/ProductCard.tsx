@@ -1,6 +1,5 @@
 
 
-
 "use client";
 
 import { FiHeart, FiShoppingCart } from "react-icons/fi";
@@ -9,12 +8,12 @@ import { useWishlist } from "../context/WishlistContext";
 import Image from "next/image";
 
 interface Product {
-  id: number;  // Updated to match expected type
+  id: number;
   name: string;
   price: number;
-  image: string;
+  image: string;  // ✅ Changed from `imageUrl` to `image`
   description: string;
-  quantity?: number; // Optional for Wishlist
+  quantity?: number;
 }
 
 interface Props {
@@ -26,13 +25,15 @@ const ProductCard: React.FC<Props> = ({ product }) => {
   const { addToWishlist } = useWishlist();
 
   const handleAddToCart = () => addToCart({
-    ...product, quantity: 1,
-    imageUrl: ""
+    ...product,
+    quantity: 1,
   });
+
   const handleAddToWishlist = () => addToWishlist(product);
 
   return (
     <div className="border p-4 rounded-md shadow-md hover:shadow-lg transition">
+      {/* ✅ Ensure `product.image` is used correctly */}
       <Image 
         src={product.image} 
         alt={product.name} 
@@ -66,6 +67,7 @@ const ProductCard: React.FC<Props> = ({ product }) => {
 };
 
 export default ProductCard;
+
 
 
 
