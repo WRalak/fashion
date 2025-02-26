@@ -6,7 +6,7 @@ html,body{
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: 'Inter',sans-serif;
+  font-family: "Inter", serif;
   background-color: white;
 }
 
@@ -21,5 +21,5 @@ html,body{
 
 
 body {
-  font-family: 'Inter', sans-serif;
+  font-family: "Inter", serif;
 }
