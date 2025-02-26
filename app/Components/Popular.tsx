@@ -1,6 +1,5 @@
 
 
-
 'use client';
 import React, { useState } from 'react';
 import { useCart } from '../context/CartContext';
@@ -39,22 +38,19 @@ const MostPopular = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
 
   const handleNext = () => {
-    if (currentIndex + 4 < products.length) {
-      setCurrentIndex(currentIndex + 4);
-    }
+    setCurrentIndex((prevIndex) => Math.min(prevIndex + 4, products.length - 4));
   };
 
   const handlePrev = () => {
-    if (currentIndex - 4 >= 0) {
-      setCurrentIndex(currentIndex - 4);
-    }
+    setCurrentIndex((prevIndex) => Math.max(prevIndex - 4, 0));
   };
 
   const displayedProducts = products.slice(currentIndex, currentIndex + 4);
 
-  const handleAddToCart = (product: Product) => {
+  const handleAddToCart = (product: Product, event: React.MouseEvent) => {
+    event.stopPropagation(); // Prevent unintended behaviors
     const cartItem: CartItem = { ...product, quantity: 1 };
-    addToCart(cartItem); // Only adds to cart, no navigation
+    addToCart(cartItem);
   };
 
   return (
@@ -63,10 +59,10 @@ const MostPopular = () => {
       <div className="flex justify-between items-center mb-2">
         <h4 className="text-lg">Popular Right Now</h4>
         <div className="flex space-x-1 max-w-[985px]">
-          <button onClick={handlePrev} className="p-1">
+          <button onClick={handlePrev} className="p-1 disabled:opacity-50" disabled={currentIndex === 0}>
             <FaChevronLeft size={12} className="text-orange-500" />
           </button>
-          <button onClick={handleNext} className="p-1">
+          <button onClick={handleNext} className="p-1 disabled:opacity-50" disabled={currentIndex >= products.length - 4}>
             <FaChevronRight size={12} className="text-orange-500" />
           </button>
         </div>
@@ -78,7 +74,10 @@ const MostPopular = () => {
           <div key={product.id} className="relative">
             {/* Wishlist Button */}
             <button
-              onClick={() => addToWishlist(product)}
+              onClick={(e) => {
+                e.stopPropagation();
+                addToWishlist(product);
+              }}
               className="absolute top-2 right-2 text-gray-700"
             >
               <CiHeart size={16} className="text-black" />
@@ -91,13 +90,12 @@ const MostPopular = () => {
               className="w-full aspect-[3/4] object-cover cursor-pointer rounded"
               width={885} 
               height={700}
-              onClick={() => handleAddToCart(product)}
+              onClick={(e) => handleAddToCart(product, e)}
             />
 
             {/* Product Info */}
             <div className="p-2">
               <h5 className="text-xs">{product.name}</h5>
-             
               <p className="text-xs text-blue-600 mt-1">{product.description}</p>
               <p className="text-xs font-semibold mt-2 text-gray-950">KES {product.price}</p>
             </div>
@@ -109,5 +107,7 @@ const MostPopular = () => {
 };
 
 export default MostPopular;
+
+
 
 

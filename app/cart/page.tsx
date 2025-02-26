@@ -45,7 +45,7 @@ const CartPage: React.FC = () => {
       <h2 className="text-xl font-semibold mb-4">Your Cart</h2>
 
       {cart.length === 0 ? (
-        <p>Your cart is empty.</p>
+        <p>No items in cart</p>
       ) : (
         <div className="w-full max-w-2xl space-y-3">
           {cart.map((product: CartItem) => (

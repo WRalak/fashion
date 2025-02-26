@@ -15,6 +15,7 @@ const PaymentDetails: React.FC = () => {
   };
 
   // Function to validate the form
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   const validateForm = (): boolean => {
     if (!selectedPayment) return false;
     if (selectedPayment === "Mpesa" && mpesaNumber.trim().length < 10) return false;
@@ -24,7 +25,7 @@ const PaymentDetails: React.FC = () => {
   // Effect to update button state when inputs change
   useEffect(() => {
     setIsButtonDisabled(!validateForm());
-  }, [selectedPayment, mpesaNumber]);
+  }, [selectedPayment, mpesaNumber, validateForm]);
 
   return (
     <div className="w-full max-w-lg mx-auto mt-6">

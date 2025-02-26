@@ -25,7 +25,10 @@ const ProductCard: React.FC<Props> = ({ product }) => {
   const { addToCart } = useCart();
   const { addToWishlist } = useWishlist();
 
-  const handleAddToCart = () => addToCart({ ...product, quantity: 1 });
+  const handleAddToCart = () => addToCart({
+    ...product, quantity: 1,
+    imageUrl: ""
+  });
   const handleAddToWishlist = () => addToWishlist(product);
 
   return (
