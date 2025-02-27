@@ -1,4 +1,4 @@
-
+'use client'
 
 import { Suspense } from "react";
 
@@ -14,6 +14,6 @@ const LoansPage = () => {
   );
 };
 
-export default LoansPage
 
+export default LoansPage
   
