@@ -1,15 +1,14 @@
-import React from 'react'
-import Sidebar from '../Components/Sidebar'
+import React, { Suspense } from 'react'
+
 
 const page = () => {
   return (
-    <div className='flex'>
-      <Sidebar/>
-      <div>
-        <h2>product</h2>
-      </div>
-      
-    </div>
+    <Suspense fallback={<p>Loading...</p>}>
+       <div>
+         loans
+   
+       </div>
+       </Suspense>
   )
 }
 

@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useState } from "react";
+import React, { Suspense, useState } from "react";
 import {  FaChevronDown, FaEye } from "react-icons/fa";
 import { FaRegEnvelopeOpen } from "react-icons/fa";
 import { CiLock } from "react-icons/ci";
@@ -24,6 +24,8 @@ const AuthForm: React.FC = () => {
   const countryCodes = ["+254", "+255", "+256"]; // Add more codes as needed
 
   return (
+
+    <Suspense   fallback={<p>Loading...</p>}>   
     <div className="flex justify-center items-center min-h-screen bg-gray-100 p-4">
       <div className="bg-white p-6 sm:p-8 rounded-lg shadow-lg w-full max-w-[380px] top-0">
         {/* Forgot Password Section */}
@@ -274,6 +276,7 @@ const AuthForm: React.FC = () => {
         )}
       </div>
     </div>
+    </Suspense>
   );
 };
 

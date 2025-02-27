@@ -1,24 +1,23 @@
+"use client";
 
+import { useSearchParams } from "next/navigation";
+import { Suspense } from "react";
 
-import Sidebar from "../Components/Sidebar";
+const MpesaPage = () => {
+  const searchParams = useSearchParams(); // This requires a Client Component
 
-const ShopOwnerDashboard = () => {
   return (
-    <div className="flex">
-      <Sidebar />
-      <div className="flex-1 min-h-screen flex justify-center items-center p-5 transition-all md:ml-64">
-        <div className="bg-white shadow-md p-10 rounded-md w-full max-w-2xl">
-          <h1 className="text-2xl font-bold text-center">Welcome to Your Mpesa Shop Dashboard</h1>
-          <p className="text-center text-gray-600 mt-2">
-            Manage your products, orders, customers, and more.
-          </p>
-        </div>
+    <Suspense fallback={<p>Loading...</p>}>
+      <div>
+        <h1>Mpesa Payment</h1>
+        <p>Query Params: {searchParams.toString()}</p>
       </div>
-    </div>
+    </Suspense>
   );
 };
 
-export default ShopOwnerDashboard;
+export default MpesaPage;
+
 
 
 

@@ -2,7 +2,7 @@
 
 "use client";
 
-import React, { useState } from "react";
+import React, { Suspense, useState } from "react";
 import { useCart } from "../context/CartContext";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
@@ -52,6 +52,7 @@ const CheckoutPage: React.FC = () => {
   };
 
   return (
+    <Suspense  fallback={<p>Loading...</p>}>   
     <div className="flex flex-col items-center my-8 px-4 text-center">
       {/* Hero Image */}
       <div className="w-full flex flex-col items-center">
@@ -201,6 +202,8 @@ const CheckoutPage: React.FC = () => {
         </div>
       </div>
     </div>
+    </Suspense>
+    
   );
 };
 

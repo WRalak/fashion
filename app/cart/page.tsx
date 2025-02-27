@@ -1,7 +1,7 @@
 
 "use client";
 
-import React from "react";
+import React, { Suspense } from "react";
 import { useCart } from "../context/CartContext";
 import Image from "next/image";
 import { FaTrashAlt } from "react-icons/fa"; // Trash icon for delete
@@ -41,6 +41,7 @@ const CartPage: React.FC = () => {
   );
 
   return (
+    <Suspense  fallback={<p>Loading...</p>}>
     <div className="my-4 px-4 flex flex-col items-center text-center">
       <h2 className="text-xl font-semibold mb-4">Your Cart</h2>
 
@@ -123,6 +124,7 @@ const CartPage: React.FC = () => {
         </div>
       )}
     </div>
+    </Suspense>
   );
 };
 

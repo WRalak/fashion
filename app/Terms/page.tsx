@@ -1,7 +1,11 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 
 const Page = () => {
   return (
+     <Suspense fallback={<p>Loading...</p>}>
+        
+        
+        
     <div className="px-4 md:px-8 lg:px-16 xl:px-24 mt-4 max-w-4xl mx-auto">
       <h1 className="text-xl md:text-2xl font-bold">Terms And Conditions</h1>
       <p className="text-xs md:text-sm font-extralight mt-2 text-gray-700">
@@ -50,6 +54,7 @@ const Page = () => {
         <strong>Solgates Team</strong>
       </p>
     </div>
+    </Suspense>
   );
 };
 

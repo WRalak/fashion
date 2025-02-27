@@ -1,18 +1,19 @@
+'use client';
+
+import React, { Suspense } from 'react';
 
 
-
-import React from 'react'
-import Sidebar from '../Components/Sidebar'
-
-const page = () => {
+const Dashboard = () => {
   return (
-    <div className='flex'>
-      <Sidebar/>
-      <h5>dashboard</h5>
-      
-    </div>
-  )
-}
+      <Suspense fallback={<p>Loading...</p>}>
+        <div>
+          loans
+    
+        </div>
+        </Suspense>
+  );
+};
 
-export default page
+export default Dashboard;
+
 
