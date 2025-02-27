@@ -4,9 +4,11 @@ import Image from "next/image";
 import Membership from "../app/Components/Membership";
 import Shop from "../app/Components/Shop";
 import PopularProducts from "./Components/Popular";
+import { Suspense } from "react";
 
 export default function Home() {
   return (
+    <Suspense fallback={<p>Loading...</p>}>
     <div className="flex flex-col items-center  w-full ">
 
 
@@ -21,5 +23,6 @@ export default function Home() {
       <PopularProducts />
       <Membership />
     </div>
+    </Suspense>
   );
 }

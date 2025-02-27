@@ -4,12 +4,14 @@
 
 import { useWishlist } from "../context/WishlistContext";
 import Image from "next/image";
+import { Suspense } from "react";
 import { AiFillHeart } from "react-icons/ai";
 
 const Wishlist = () => {
   const { wishlist, removeFromWishlist } = useWishlist();
 
   return (
+    <Suspense fallback={<p>Loading...</p>}>  
     <div className="relative w-full min-h-screen flex flex-col items-center">
       {/* Hero Image */}
       <div className="relative w-full flex items-center justify-center">
@@ -62,6 +64,7 @@ const Wishlist = () => {
         )}
       </div>
     </div>
+    </Suspense>
   );
 };
 
