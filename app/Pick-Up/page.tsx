@@ -1,19 +1,22 @@
-'use client'
+"use client";
 
 import { Suspense } from "react";
+import { useSearchParams } from "next/navigation";
 
-
-
-const ShopOwnerDashboard = () => {
+const PickUpPage = () => {
   return (
-     <Suspense fallback={<p>Loading...</p>}>
-        <div>
-          loans
-    
-        </div>
-        </Suspense>
+    <Suspense fallback={<p>Loading pickup details...</p>}>
+      <PickUpContent />
+    </Suspense>
   );
 };
 
-export default ShopOwnerDashboard;
+const PickUpContent = () => {
+  const searchParams = useSearchParams();
+
+  return <div>Selected Pickup: {searchParams.get("id")}</div>;
+};
+
+export default PickUpPage;
+
 
